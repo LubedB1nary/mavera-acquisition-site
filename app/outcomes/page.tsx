@@ -55,29 +55,29 @@ export default function OutcomesPage() {
               [false, 'Book 12 qualified discoveries'],
             ]}
             children={[
-              ['done', 'Research: Diagnostics vertical deep-dive'],
+              ['done', 'Research: Logistics vertical deep-dive'],
               ['running', 'Outreach: Wave 1 · 8 accounts'],
-              ['running', 'Monitor: CLIA filings in target geos'],
+              ['running', 'Monitor: Series B announcements in target geos'],
             ]}
-            journal="Momentum holding. Diagnostics is responding 2.4× better than Payers. Recommend shifting next wave 60/40 toward Diagnostics. Tomorrow: draft wave-2 copy for Payers with new ROI framing."
+            journal="Momentum holding. Logistics is responding 2.4× better than FinServ. Recommend shifting next wave 60/40 toward Logistics. Tomorrow: draft wave-2 copy for FinServ with new ROI framing."
             stats={{ days: 12, progress: '47%' }}
           />
           <OutcomeCard
             color="#a3e6c4"
-            name="Assay performance audit"
-            goal="Reduce between-run variance by 15% on the respiratory panel in 60 days."
+            name="Support resolution audit"
+            goal="Reduce ticket resolution time by 15% across Tier-2 support in 60 days."
             todos={[
-              [true, 'Characterize current variance sources'],
-              [true, 'Generate synthetic matched controls'],
-              [false, 'Run controlled experiment across 3 sites'],
-              [false, 'Draft calibration procedure'],
+              [true, 'Characterize current resolution-time drivers'],
+              [true, 'Generate synthetic matched ticket controls'],
+              [false, 'Run controlled experiment across 3 teams'],
+              [false, 'Draft routing + macro update procedure'],
             ]}
             children={[
-              ['done', 'Generate 10k synthetic matched runs'],
+              ['done', 'Generate 10k synthetic matched tickets'],
               ['running', 'Train drift detector'],
             ]}
             questions={[{
-              q: 'Variance dropped 18% at n=40 — exceeds target. Continue or close?',
+              q: 'Resolution time dropped 18% at n=40 — exceeds target. Continue or close?',
               opts: ['Continue · aim for 20%', 'Close · write report now', 'Pause · let me decide tomorrow'],
             }]}
             stats={{ days: 24, progress: '62%' }}
@@ -109,7 +109,7 @@ export default function OutcomesPage() {
             <div className="mav-eyebrow" style={{ marginBottom: 14 }}>iMessage · Maven</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
               {[
-                { who: 'Maven', text: '[Maven] Variance dropped 18% at n=40 on respiratory audit — exceeds target. Continue or close?', mine: false },
+                { who: 'Maven', text: '[Maven] Resolution time dropped 18% at n=40 on the support audit — exceeds target. Continue or close?', mine: false },
                 { who: 'You', text: 'close · write report now', mine: true },
                 { who: 'Maven', text: '[Maven] Writing. Expect the final report in tomorrow\'s 9am session.', mine: false },
               ].map((m, i) => (

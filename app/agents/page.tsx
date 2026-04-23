@@ -8,7 +8,7 @@ import { ArrowRight } from '@/components/icons';
 
 const agents = [
   { slug: 'maven',    code: '★', name: 'Maven',             tag: 'GENERALIZED ASSISTANT', desc: 'One generalist that wields all twelve tools. Point Maven at a goal, get an Outcome back.', featured: true },
-  { slug: 'sales',    code: '01', name: 'Sales',            tag: 'SEVEN AGENTS',          desc: 'The 7-agent Glengarry flywheel. Signal → outreach → qualified meeting.' },
+  { slug: 'sales',    code: '01', name: 'Sales',            tag: 'SEVEN AGENTS',          desc: 'The 7-agent Argus flywheel. Signal → outreach → qualified meeting.' },
   { slug: 'research', code: '02', name: 'Research',         tag: 'DEEP · 5-PHASE',        desc: 'Scope → search → synthesize → attribute → audit. Every claim sourced.' },
   { slug: 'content',  code: '03', name: 'Content',          tag: 'BRAND VOICE',           desc: 'Extracts your voice, tests against synthetic panels, writes at volume.' },
   { slug: 'meetings', code: '04', name: 'Meetings',         tag: 'RECORD · EXTRACT',      desc: 'Records, transcribes, extracts action items + decisions + follow-ups.' },

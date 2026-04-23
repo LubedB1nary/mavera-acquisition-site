@@ -9,9 +9,9 @@ import { PipelineRow } from '@/components/pipeline-row';
 import { ArrowRight } from '@/components/icons';
 
 const stages = [
-  { n: '01', agent: 'Signal Scanner',       artifact: 'CLIA filing · Meridian · Relevance 92' },
-  { n: '02', agent: 'Prospect Researcher',  artifact: 'Dossier · volume 38K/yr · leakage $1.4M' },
-  { n: '03', agent: 'Outreach Drafter',     artifact: 'Draft · Lab Director persona · signal-tied' },
+  { n: '01', agent: 'Signal Scanner',       artifact: 'Series B · Northwind · Relevance 92' },
+  { n: '02', agent: 'Prospect Researcher',  artifact: 'Dossier · 1,200 staff · overhead $2.1M' },
+  { n: '03', agent: 'Outreach Drafter',     artifact: 'Draft · VP Operations persona · signal-tied' },
   { n: '04', agent: 'Conversation Handler', artifact: 'Reply received · sentiment +0.62 · interested' },
   { n: '05', agent: 'Qualifier',            artifact: 'ICP fit 87/100 · decision-maker confirmed' },
   { n: '06', agent: 'Re-engager',           artifact: 'Stalled deal · fresh angle · new ROI data' },
@@ -19,8 +19,8 @@ const stages = [
 ];
 
 const roster = [
-  { name: 'Signal Scanner',       role: 'Detection',   desc: 'Monitors CLIA, payer policy, news, competitor moves, PE activity. Everything scored 0–100.' },
-  { name: 'Prospect Researcher',  role: 'Research',    desc: 'CMS QCOR · LabScope · LinkedIn. Builds a defensible dossier per prospect.' },
+  { name: 'Signal Scanner',       role: 'Detection',   desc: 'Monitors funding news, executive hires, press wires, competitor moves, PE activity. Everything scored 0–100.' },
+  { name: 'Prospect Researcher',  role: 'Research',    desc: 'Crunchbase · Apollo · LinkedIn. Builds a defensible dossier per prospect.' },
   { name: 'Outreach Drafter',     role: 'Generation',  desc: 'Writes in your brand voice, calibrated to persona, anchored to a triggering signal.' },
   { name: 'Conversation Handler', role: 'Response',    desc: 'Reads replies. Scores sentiment. Advances stages. Drafts contextual follow-ups.' },
   { name: 'Qualifier',            role: 'Judgment',    desc: 'ICP fit · budget · authority · need · timeline. Every contributing factor visible.' },
@@ -73,7 +73,7 @@ export default function SalesAgentsPage() {
           <div className="mav-eyebrow" style={{ marginBottom: 24 }}>/ agents / sales</div>
           <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: 64, alignItems: 'center' }}>
             <div>
-              <h1 className="mav-h1" style={{ fontSize: 76 }}>The <em>Glengarry</em> flywheel.</h1>
+              <h1 className="mav-h1" style={{ fontSize: 76 }}>The <em>Argus</em> flywheel.</h1>
               <p className="mav-lede" style={{ maxWidth: 540, marginTop: 28 }}>
                 Seven specialists running the full sales cycle autonomously. Signal detection, prospect research,
                 outreach, reply handling, qualification, re-engagement, meeting prep. You close.

@@ -3,12 +3,12 @@ import { useState, useEffect } from 'react';
 import { Check } from './icons';
 
 const AGENT_STEPS = [
-  { agent: 'Signal Scanner', code: '01', title: 'Signal detected', narr: 'A new regulatory filing crosses our radar. Geo-tagged, scored 0–100 by relevance.', artifact: 'signal' },
+  { agent: 'Signal Scanner', code: '01', title: 'Signal detected', narr: 'A funding announcement crosses our radar. Tagged, deduped, scored 0–100 by relevance.', artifact: 'signal' },
   { agent: 'Signal Scanner', code: '02', title: 'Scored & categorized', narr: 'The signal is classified and routed — high-relevance (≥80) auto-triggers the Prospect Researcher.', artifact: 'signal_scored' },
-  { agent: 'Prospect Researcher', code: '03', title: 'Prospect auto-created', narr: 'A prospect record spawns from the signal. Company, director, certificate type pulled from CMS QCOR.', artifact: 'prospect' },
-  { agent: 'Prospect Researcher', code: '04', title: 'Enrichment run', narr: 'LabScope + LinkedIn enrich the profile. Send-out volume, current PCR platform, revenue leakage estimated.', artifact: 'enrichment' },
+  { agent: 'Prospect Researcher', code: '03', title: 'Prospect auto-created', narr: 'A prospect record spawns from the signal. Company, executive, round details pulled from Crunchbase + press wire.', artifact: 'prospect' },
+  { agent: 'Prospect Researcher', code: '04', title: 'Enrichment run', narr: 'Apollo + LinkedIn enrich the profile. Headcount, growth rate, current ops stack, overhead estimate.', artifact: 'enrichment' },
   { agent: 'Prospect Researcher', code: '05', title: 'Dossier assembled', narr: 'Pain points, opportunity sizing, competitive context — all with sources and confidence scores.', artifact: 'dossier' },
-  { agent: 'Outreach Drafter', code: '06', title: 'Outreach drafted', narr: 'Written in your brand voice, calibrated to the Lab Director persona, tied to the triggering signal.', artifact: 'draft' },
+  { agent: 'Outreach Drafter', code: '06', title: 'Outreach drafted', narr: 'Written in your brand voice, calibrated to the VP Operations persona, tied to the triggering signal.', artifact: 'draft' },
   { agent: 'Outreach Drafter', code: '07', title: 'Sent', narr: 'Queued for human review or auto-sent via your own IMAP/SMTP. No third-party CRM in the middle.', artifact: 'sent' },
   { agent: 'Conversation Handler', code: '08', title: 'Reply received', narr: 'Sentiment scored. Intent classified: interested, objection, question, not interested.', artifact: 'reply' },
   { agent: 'Conversation Handler', code: '09', title: 'Deal advanced', narr: 'Stage moves based on engagement. A contextual response is drafted against the actual reply.', artifact: 'advanced' },
@@ -57,24 +57,24 @@ const ArtifactFrame = ({ children, title, tag }: { children: React.ReactNode; ti
 function Artifact({ kind }: { kind: string }) {
   switch (kind) {
     case 'signal': return (
-      <ArtifactFrame title="Signal · CLIA filing" tag="Scanning…">
+      <ArtifactFrame title="Signal · Funding announcement" tag="Scanning…">
         <div style={{ display: 'grid', gridTemplateColumns: '90px 1fr', gap: '6px 14px', fontSize: 13 }}>
-          <span style={{ color: 'var(--muted)' }}>Source</span><span>CMS QCOR · US-CA</span>
-          <span style={{ color: 'var(--muted)' }}>Type</span><span>New CLIA certificate filed</span>
-          <span style={{ color: 'var(--muted)' }}>Lab</span><span>Meridian Clinical Diagnostics</span>
-          <span style={{ color: 'var(--muted)' }}>Director</span><span>Dr. L. Osei, MD PhD</span>
-          <span style={{ color: 'var(--muted)' }}>Filed</span><span>14 min ago</span>
+          <span style={{ color: 'var(--muted)' }}>Source</span><span>Press wire · US-IL</span>
+          <span style={{ color: 'var(--muted)' }}>Type</span><span>Series B · $45M raised</span>
+          <span style={{ color: 'var(--muted)' }}>Company</span><span>Northwind Logistics</span>
+          <span style={{ color: 'var(--muted)' }}>Lead</span><span>Sarah Chen · VP Operations</span>
+          <span style={{ color: 'var(--muted)' }}>Posted</span><span>14 min ago</span>
         </div>
       </ArtifactFrame>
     );
     case 'signal_scored': return (
-      <ArtifactFrame title="Signal · CLIA filing" tag="Relevance 92">
+      <ArtifactFrame title="Signal · Funding announcement" tag="Relevance 92">
         <div style={{ display: 'grid', gridTemplateColumns: '90px 1fr', gap: '6px 14px', fontSize: 13 }}>
-          <span style={{ color: 'var(--muted)' }}>Source</span><span>CMS QCOR · US-CA</span>
-          <span style={{ color: 'var(--muted)' }}>Type</span><span>New CLIA certificate filed</span>
-          <span style={{ color: 'var(--muted)' }}>Lab</span><span>Meridian Clinical Diagnostics</span>
-          <span style={{ color: 'var(--muted)' }}>Director</span><span>Dr. L. Osei, MD PhD</span>
-          <span style={{ color: 'var(--muted)' }}>Filed</span><span>14 min ago</span>
+          <span style={{ color: 'var(--muted)' }}>Source</span><span>Press wire · US-IL</span>
+          <span style={{ color: 'var(--muted)' }}>Type</span><span>Series B · $45M raised</span>
+          <span style={{ color: 'var(--muted)' }}>Company</span><span>Northwind Logistics</span>
+          <span style={{ color: 'var(--muted)' }}>Lead</span><span>Sarah Chen · VP Operations</span>
+          <span style={{ color: 'var(--muted)' }}>Posted</span><span>14 min ago</span>
         </div>
         <div style={{ marginTop: 4, display: 'flex', flexDirection: 'column', gap: 8 }}>
           <ScoreBar value={92} label="Relevance" />
@@ -83,60 +83,60 @@ function Artifact({ kind }: { kind: string }) {
       </ArtifactFrame>
     );
     case 'prospect': return (
-      <ArtifactFrame title="Prospect · Meridian Clinical Diagnostics" tag="Creating">
+      <ArtifactFrame title="Prospect · Northwind Logistics" tag="Creating">
         <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-          <div style={{ width: 40, height: 40, borderRadius: 8, background: 'linear-gradient(135deg,#2a2420,#1a1814)', border: '1px solid var(--line)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--serif)', fontSize: 18, color: 'var(--gold)' }}>M</div>
+          <div style={{ width: 40, height: 40, borderRadius: 8, background: 'linear-gradient(135deg,#2a2420,#1a1814)', border: '1px solid var(--line)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--serif)', fontSize: 18, color: 'var(--gold)' }}>N</div>
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: 14, fontWeight: 500 }}>Meridian Clinical Diagnostics</div>
-            <div style={{ fontSize: 12, color: 'var(--muted)' }}>ICL · 40 staff · San Jose, CA</div>
+            <div style={{ fontSize: 14, fontWeight: 500 }}>Northwind Logistics</div>
+            <div style={{ fontSize: 12, color: 'var(--muted)' }}>Mid-market · 1,200 staff · Chicago, IL</div>
           </div>
         </div>
       </ArtifactFrame>
     );
     case 'enrichment': return (
-      <ArtifactFrame title="Prospect · Meridian Clinical Diagnostics" tag="Enriching">
+      <ArtifactFrame title="Prospect · Northwind Logistics" tag="Enriching">
         <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-          <div style={{ width: 40, height: 40, borderRadius: 8, background: 'linear-gradient(135deg,#2a2420,#1a1814)', border: '1px solid var(--line)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--serif)', fontSize: 18, color: 'var(--gold)' }}>M</div>
+          <div style={{ width: 40, height: 40, borderRadius: 8, background: 'linear-gradient(135deg,#2a2420,#1a1814)', border: '1px solid var(--line)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--serif)', fontSize: 18, color: 'var(--gold)' }}>N</div>
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: 14, fontWeight: 500 }}>Meridian Clinical Diagnostics</div>
-            <div style={{ fontSize: 12, color: 'var(--muted)' }}>ICL · 40 staff · San Jose, CA</div>
+            <div style={{ fontSize: 14, fontWeight: 500 }}>Northwind Logistics</div>
+            <div style={{ fontSize: 12, color: 'var(--muted)' }}>Mid-market · 1,200 staff · Chicago, IL</div>
           </div>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 8, fontSize: 12.5, marginTop: 4 }}>
-          {[['Send-out volume', '38K/yr'], ['Revenue leakage', '$1.4M'], ['Current platform', 'Send-out only'], ['Lead score', '87/100']].map(([label, val]) => (
+          {[['Headcount', '1,200'], ['Ops overhead', '$2.1M'], ['Current stack', 'Manual / spreadsheet'], ['Lead score', '87/100']].map(([label, val]) => (
             <div key={label} style={{ padding: 10, background: 'rgba(255,255,255,0.02)', borderRadius: 8, border: '1px solid var(--line-soft)' }}>
               <div style={{ color: 'var(--muted)', fontSize: 11 }}>{label}</div>
-              <div style={{ fontFamily: 'var(--mono)', fontSize: 15, marginTop: 2, color: label.includes('leakage') || label.includes('score') ? 'var(--gold)' : 'inherit' }}>{val}</div>
+              <div style={{ fontFamily: 'var(--mono)', fontSize: 15, marginTop: 2, color: label.includes('overhead') || label.includes('score') ? 'var(--gold)' : 'inherit' }}>{val}</div>
             </div>
           ))}
         </div>
       </ArtifactFrame>
     );
     case 'dossier': return (
-      <ArtifactFrame title="Prospect · Meridian Clinical Diagnostics" tag="Dossier ready">
+      <ArtifactFrame title="Prospect · Northwind Logistics" tag="Dossier ready">
         <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-          <div style={{ width: 40, height: 40, borderRadius: 8, background: 'linear-gradient(135deg,#2a2420,#1a1814)', border: '1px solid var(--line)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--serif)', fontSize: 18, color: 'var(--gold)' }}>M</div>
+          <div style={{ width: 40, height: 40, borderRadius: 8, background: 'linear-gradient(135deg,#2a2420,#1a1814)', border: '1px solid var(--line)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--serif)', fontSize: 18, color: 'var(--gold)' }}>N</div>
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: 14, fontWeight: 500 }}>Meridian Clinical Diagnostics</div>
-            <div style={{ fontSize: 12, color: 'var(--muted)' }}>ICL · 40 staff · San Jose, CA</div>
+            <div style={{ fontSize: 14, fontWeight: 500 }}>Northwind Logistics</div>
+            <div style={{ fontSize: 12, color: 'var(--muted)' }}>Mid-market · 1,200 staff · Chicago, IL</div>
           </div>
         </div>
         <div style={{ fontSize: 12.5, color: 'var(--dim)', lineHeight: 1.55, marginTop: 4 }}>
-          <span style={{ color: 'var(--text)' }}>Opportunity.</span> Ripe for in-house respiratory panel. Director known to publish on infectious disease economics; high-density geo (6 existing clients in CA).
+          <span style={{ color: 'var(--text)' }}>Opportunity.</span> Series B capital earmarked for ops modernization per S-1 commentary. Manual back-office workflows; high-density geo (8 existing customers in IL/WI).
         </div>
       </ArtifactFrame>
     );
     case 'draft': return (
       <ArtifactFrame title="Outreach · Draft" tag="Ready for review">
         <div style={{ fontSize: 12.5, color: 'var(--muted)', display: 'flex', gap: 14 }}>
-          <span>To <span style={{ color: 'var(--dim)' }}>l.osei@meridianclin.dx</span></span>
+          <span>To <span style={{ color: 'var(--dim)' }}>s.chen@northwind.io</span></span>
         </div>
-        <div style={{ fontSize: 14, color: 'var(--text)', fontWeight: 500 }}>Congrats on the new CLIA — a thought on respiratory</div>
+        <div style={{ fontSize: 14, color: 'var(--text)', fontWeight: 500 }}>Congrats on the Series B — a thought on ops automation</div>
         <div style={{ fontSize: 13, color: 'var(--dim)', lineHeight: 1.6 }}>
-          Dr. Osei — saw your certificate post today. Given Meridian's volume profile, bringing a 21-target respiratory panel in-house likely recovers ~$1.4M in annual send-out margin.
+          Sarah — saw the announcement today. Given Northwind's headcount and growth curve, automating the back-office workflow stack typically recovers ~$2.1M in annual operations overhead within twelve months.
         </div>
         <div style={{ display: 'flex', gap: 6, marginTop: 4, flexWrap: 'wrap' }}>
-          {['Brand voice: Ospri', 'Persona: Lab Director', 'Signal: CLIA filing'].map(t => (
+          {['Brand voice: Helio', 'Persona: VP Operations', 'Signal: Series B'].map(t => (
             <span key={t} style={{ fontSize: 11, fontFamily: 'var(--mono)', letterSpacing: '.02em', padding: '3px 8px', border: '1px solid var(--line)', borderRadius: 4, color: 'var(--muted)' }}>{t}</span>
           ))}
         </div>
@@ -145,18 +145,18 @@ function Artifact({ kind }: { kind: string }) {
     case 'sent': return (
       <ArtifactFrame title="Outreach · Sent" tag="Delivered">
         <div style={{ fontSize: 12.5, color: 'var(--muted)', display: 'flex', gap: 14 }}>
-          <span>To <span style={{ color: 'var(--dim)' }}>l.osei@meridianclin.dx</span></span>
+          <span>To <span style={{ color: 'var(--dim)' }}>s.chen@northwind.io</span></span>
         </div>
-        <div style={{ fontSize: 14, color: 'var(--text)', fontWeight: 500 }}>Congrats on the new CLIA — a thought on respiratory</div>
+        <div style={{ fontSize: 14, color: 'var(--text)', fontWeight: 500 }}>Congrats on the Series B — a thought on ops automation</div>
         <div style={{ fontSize: 13, color: 'var(--dim)', lineHeight: 1.6 }}>
-          Dr. Osei — saw your certificate post today. Given Meridian's volume profile, bringing a 21-target respiratory panel in-house likely recovers ~$1.4M in annual send-out margin.
+          Sarah — saw the announcement today. Given Northwind's headcount and growth curve, automating the back-office workflow stack typically recovers ~$2.1M in annual operations overhead within twelve months.
         </div>
       </ArtifactFrame>
     );
     case 'reply': return (
-      <ArtifactFrame title="Reply · Dr. L. Osei" tag="Sentiment +0.62">
+      <ArtifactFrame title="Reply · Sarah Chen" tag="Sentiment +0.62">
         <div style={{ fontSize: 13, color: 'var(--dim)', lineHeight: 1.55, fontStyle: 'italic', borderLeft: '2px solid var(--gold)', paddingLeft: 12 }}>
-          "Timely. We've been quoting send-out costs all quarter. Would 20 min next week work?"
+          "Timely. Workflow consolidation is the #1 line item in our 90-day plan. Would 20 min next week work?"
         </div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {[['Intent', 'Interested'], ['Urgency', 'This quarter'], ['Authority', 'Decision-maker']].map(([k, v]) => (
@@ -168,9 +168,9 @@ function Artifact({ kind }: { kind: string }) {
       </ArtifactFrame>
     );
     case 'advanced': return (
-      <ArtifactFrame title="Reply · Dr. L. Osei" tag="Stage → engaged">
+      <ArtifactFrame title="Reply · Sarah Chen" tag="Stage → engaged">
         <div style={{ fontSize: 13, color: 'var(--dim)', lineHeight: 1.55, fontStyle: 'italic', borderLeft: '2px solid var(--gold)', paddingLeft: 12 }}>
-          "Timely. We've been quoting send-out costs all quarter. Would 20 min next week work?"
+          "Timely. Workflow consolidation is the #1 line item in our 90-day plan. Would 20 min next week work?"
         </div>
         <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
           {[['Intent', 'Interested'], ['Sentiment', '+0.62'], ['Urgency', 'This quarter'], ['Authority', 'Decision-maker']].map(([k, v]) => (
@@ -184,7 +184,7 @@ function Artifact({ kind }: { kind: string }) {
     case 'qualified': return (
       <ArtifactFrame title="Qualification · ICP fit" tag="Score 87 / 100">
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          {[['Lab type · ICL', 80], ['Volume · 38K/yr', 82], ['Platform · send-out only', 85], ['Leakage · $1.4M', 80], ['Engagement · reply', 92], ['Geo density · 6 in-state', 90]].map(([l, v]) => (
+          {[['Segment · Mid-market', 80], ['Headcount · 1,200', 82], ['Stack · manual', 85], ['Overhead · $2.1M', 80], ['Engagement · reply', 92], ['Geo density · 8 in-region', 90]].map(([l, v]) => (
             <ScoreBar key={l as string} value={v as number} label={l as string} />
           ))}
         </div>
@@ -193,24 +193,24 @@ function Artifact({ kind }: { kind: string }) {
     case 'booked': return (
       <ArtifactFrame title="Qualification · ICP fit" tag="Discovery booked">
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          {[['Lab type · ICL', 80], ['Volume · 38K/yr', 82], ['Engagement · reply', 92], ['Geo density', 90]].map(([l, v]) => (
+          {[['Segment · Mid-market', 80], ['Headcount · 1,200', 82], ['Engagement · reply', 92], ['Geo density', 90]].map(([l, v]) => (
             <ScoreBar key={l as string} value={v as number} label={l as string} />
           ))}
         </div>
         <div style={{ padding: 10, background: 'var(--gold-dim)', border: '1px solid rgba(200,168,255,0.28)', borderRadius: 8, fontSize: 12.5, display: 'flex', alignItems: 'center', gap: 10 }}>
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="11" rx="1.5" stroke="var(--gold)" strokeWidth="1.3" /><path d="M2 6h12M6 1v3M10 1v3" stroke="var(--gold)" strokeWidth="1.3" /></svg>
-          <span>Discovery call · Tue 2:30 PM PT · task created for closer</span>
+          <span>Discovery call · Tue 2:30 PM CT · task created for closer</span>
         </div>
       </ArtifactFrame>
     );
     case 'brief': return (
-      <ArtifactFrame title="Meeting brief · Meridian" tag="Ready · 30 min before">
+      <ArtifactFrame title="Meeting brief · Northwind" tag="Ready · 30 min before">
         <div style={{ display: 'flex', flexDirection: 'column', gap: 8, fontSize: 12.5, color: 'var(--dim)' }}>
           {[
-            ['Profile', 'Refreshed 4 min ago. New CLIA filing context included.'],
-            ['Talking points', "Respiratory panel ROI · director's published stance · CA payer dynamics"],
-            ['Objections', 'Capex hesitation (1), staffing (2), validation timelines (3) — responses attached.'],
-            ['Ask', 'Scope a 90-day validation pilot on 21-target respiratory.'],
+            ['Profile', 'Refreshed 4 min ago. Series B announcement context included.'],
+            ['Talking points', "Workflow ROI · executive's expansion plans · IL labor market dynamics"],
+            ['Objections', 'Change-mgmt risk (1), procurement timeline (2), integration scope (3) — responses attached.'],
+            ['Ask', 'Scope a 90-day proof-of-value pilot across two ops workflows.'],
           ].map(([k, v]) => (
             <div key={k as string} style={{ display: 'grid', gridTemplateColumns: '110px 1fr', gap: 12 }}>
               <span style={{ color: 'var(--muted)', fontFamily: 'var(--mono)', fontSize: 11, letterSpacing: '.04em', textTransform: 'uppercase' }}>{k}</span>
@@ -250,7 +250,7 @@ export function AgentDemo({ compact = false }: { compact?: boolean }) {
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 12 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <span className="mav-chip-dot mav-chip-dot--live" />
-            <span className="mav-code" style={{ color: 'var(--muted)', fontSize: 11, letterSpacing: '.1em' }}>LIVE · GLENGARRY · SANDBOX DATASET</span>
+            <span className="mav-code" style={{ color: 'var(--muted)', fontSize: 11, letterSpacing: '.1em' }}>LIVE · ARGUS · SANDBOX DATASET</span>
           </div>
           <button onClick={() => setPaused(p => !p)} style={{
             background: 'transparent', border: '1px solid var(--line)', borderRadius: 6,

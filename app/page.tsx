@@ -10,10 +10,12 @@ import { ClosingCTA } from '@/components/closing-cta';
 import { CodeCard } from '@/components/code-card';
 import { ArrowRight, ArrowUpRight, Check } from '@/components/icons';
 import { HomeHero } from '@/components/home-hero';
+import { Reveal } from '@/components/reveal';
+import { TiltCard } from '@/components/tilt-card';
 
 const agentGridItems = [
-  { code: '01', name: 'Signal Scanner', desc: 'Scans CLIA, news, payer policy, competitor moves, PE. Scores 0–100.' },
-  { code: '02', name: 'Prospect Researcher', desc: 'CMS QCOR + LabScope + LinkedIn into a full prospect dossier.' },
+  { code: '01', name: 'Signal Scanner', desc: 'Scans funding news, hires, press wires, competitor moves, PE activity. Scores 0–100.' },
+  { code: '02', name: 'Prospect Researcher', desc: 'Crunchbase + Apollo + LinkedIn into a full prospect dossier.' },
   { code: '03', name: 'Outreach Drafter', desc: 'Brand-voiced, persona-calibrated, signal-aware.' },
   { code: '04', name: 'Conversation Handler', desc: 'Reads replies, scores sentiment, advances stages, drafts responses.' },
   { code: '05', name: 'Qualifier', desc: 'ICP fit · budget · authority · timeline — every factor shown.' },
@@ -24,7 +26,7 @@ const agentGridItems = [
 const personas = [
   { tag: 'GEN', name: 'Millennial · Urban · Growth-minded', fit: 92 },
   { tag: 'PRO', name: 'CFO · Mid-market · Risk-averse', fit: 74 },
-  { tag: 'EXP', name: 'Lab Director · ICL · Technical', fit: 88 },
+  { tag: 'EXP', name: 'VP Operations · Mid-market · Technical', fit: 88 },
   { tag: 'LIF', name: 'Suburban Parent · Value-seeker', fit: 66 },
 ];
 
@@ -53,7 +55,7 @@ const platformCaps: [string, string][] = [
   ['Brand Voice', 'Extracted from your existing content.'],
   ['Content Generation', 'Template-based, audience-tested.'],
   ['Meetings', 'Recording · transcript · structured extraction.'],
-  ['Autonomous Sales', 'The 7-agent Glengarry module.'],
+  ['Autonomous Sales', 'The 7-agent Argus module.'],
   ['CRM', 'Full pipeline. IMAP/SMTP. No third-party.'],
   ['Synthetic Data', 'FDA-accepted · differential privacy.'],
 ];
@@ -84,9 +86,9 @@ export default function HomePage() {
       </Section>
 
       <Section eyebrow="02 · Autonomous agents">
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.25fr', gap: 64, alignItems: 'start', marginBottom: 48 }}>
+        <Reveal style={{ display: 'grid', gridTemplateColumns: '1fr 1.25fr', gap: 64, alignItems: 'start', marginBottom: 48 }}>
           <div>
-            <h2 className="mav-h2" style={{ fontSize: 52 }}>Agents that work while you sleep — <em>not copilots.</em></h2>
+            <h2 className="mav-h2" style={{ fontSize: 52 }}>Agents that work while you sleep — <em className="mav-gradient-text">not copilots.</em></h2>
           </div>
           <div style={{ paddingTop: 16 }}>
             <p className="mav-lede" style={{ maxWidth: 520 }}>
@@ -96,21 +98,31 @@ export default function HomePage() {
             <p className="mav-body" style={{ marginTop: 16, color: 'var(--muted)' }}>
               The human closes the deal. Everything before that is handled.
             </p>
-            <Link href="/agents/sales" className="mav-btn mav-btn--ghost mav-btn--sm" style={{ marginTop: 20 }}>
+            <Link href="/agents/sales" className="mav-btn mav-btn--ghost mav-btn--sm mav-shimmer" style={{ marginTop: 20 }}>
               See the flywheel <ArrowRight size={12} />
             </Link>
           </div>
-        </div>
-        <AgentDemo />
+        </Reveal>
+        <Reveal variant="scale">
+          <AgentDemo />
+        </Reveal>
         <div style={{ marginTop: 20, display: 'flex', gap: 10, alignItems: 'center', justifyContent: 'center' }}>
-          <span className="mav-caption">Glengarry demo runs real CRM operations against a sandboxed dataset — every artifact above is live-generated.</span>
+          <span className="mav-caption">Argus demo runs real CRM operations against a sandboxed dataset — every artifact above is live-generated.</span>
         </div>
       </Section>
 
       <Section style={{ paddingTop: 40 }}>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1, background: 'var(--line)', border: '1px solid var(--line)', borderRadius: 14, overflow: 'hidden' }}>
+        <Reveal stagger style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1, background: 'var(--line)', border: '1px solid var(--line)', borderRadius: 14, overflow: 'hidden' }}>
           {agentGridItems.map(a => (
-            <div key={a.code} style={{ background: 'var(--ink0)', padding: 24, minHeight: 180, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+            <div
+              key={a.code}
+              className="mav-sheen mav-surface-lift"
+              style={{
+                padding: 24, minHeight: 180,
+                display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+                cursor: 'default',
+              }}
+            >
               <span className="mav-code" style={{ color: 'var(--gold)', fontSize: 11, letterSpacing: '.1em' }}>AGENT · {a.code}</span>
               <div>
                 <h3 style={{ fontSize: 18, fontWeight: 500, margin: '0 0 8px', letterSpacing: '-0.01em' }}>{a.name}</h3>
@@ -118,32 +130,42 @@ export default function HomePage() {
               </div>
             </div>
           ))}
-          <Link href="/agents" style={{ background: 'rgba(200,168,255,0.04)', padding: 24, display: 'flex', flexDirection: 'column', justifyContent: 'space-between', cursor: 'pointer', color: 'inherit' }}>
+          <Link
+            href="/agents"
+            className="mav-sheen mav-surface-accent"
+            style={{
+              padding: 24,
+              display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+              cursor: 'pointer', color: 'inherit',
+            }}
+          >
             <span className="mav-code" style={{ color: 'var(--gold)', fontSize: 11, letterSpacing: '.1em' }}>ALL NINE AGENTS</span>
             <div>
-              <h3 style={{ fontSize: 18, fontWeight: 500, margin: '0 0 8px', letterSpacing: '-0.01em' }}>Maven + eight specialists <span style={{ color: 'var(--gold)' }}>→</span></h3>
+              <h3 style={{ fontSize: 18, fontWeight: 500, margin: '0 0 8px', letterSpacing: '-0.01em' }}>Maven + eight specialists <span style={{ color: 'var(--gold)', display: 'inline-block', transition: 'transform .25s ease' }}>→</span></h3>
               <p style={{ fontSize: 13, color: 'var(--dim)', margin: 0 }}>Research · content · meetings · market intel · focus groups · ops · science. One index. Go direct, or let Maven compose.</p>
             </div>
           </Link>
-        </div>
+        </Reveal>
       </Section>
 
       <Section eyebrow="03 · Outcomes" style={{ background: 'var(--ink1)', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 64, alignItems: 'end', marginBottom: 40 }}>
+        <Reveal style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 64, alignItems: 'end', marginBottom: 40 }}>
           <div>
-            <h2 className="mav-h2" style={{ fontSize: 52 }}>Hand Maven <em>a goal.</em> Not a prompt.</h2>
+            <h2 className="mav-h2" style={{ fontSize: 52 }}>Hand Maven <em className="mav-gradient-text">a goal.</em> Not a prompt.</h2>
           </div>
           <div style={{ paddingTop: 8 }}>
             <p className="mav-lede" style={{ maxWidth: 560 }}>
               An Outcome is a long-running project with its own strategy session, schedule, child sessions, and journal. Maven
               wakes up on cadence, makes progress, asks when she needs help, and reports back.
             </p>
-            <Link href="/outcomes" className="mav-btn mav-btn--ghost mav-btn--sm" style={{ marginTop: 20 }}>
+            <Link href="/outcomes" className="mav-btn mav-btn--ghost mav-btn--sm mav-shimmer" style={{ marginTop: 20 }}>
               See outcomes <ArrowRight size={12} />
             </Link>
           </div>
-        </div>
-        <OutcomesCalendar />
+        </Reveal>
+        <Reveal variant="scale">
+          <OutcomesCalendar />
+        </Reveal>
       </Section>
 
       <Section eyebrow="04 · Synthetic intelligence">
@@ -152,9 +174,9 @@ export default function HomePage() {
             /synthetic — methods + audits <ArrowRight size={12} />
           </Link>
         </div>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.15fr', gap: 80, alignItems: 'center' }}>
+        <Reveal style={{ display: 'grid', gridTemplateColumns: '1fr 1.15fr', gap: 80, alignItems: 'center' }}>
           <div>
-            <h2 className="mav-h2">Ask your audience <em>before</em> you spend.</h2>
+            <h2 className="mav-h2">Ask your audience <em className="mav-gradient-text">before</em> you spend.</h2>
             <p className="mav-lede" style={{ marginTop: 24 }}>
               Fifty-plus AI personas, statistically validated at 98% accuracy against real human panels.
               Test any message, any creative, any strategy against your actual audience — in minutes, not weeks.
@@ -172,7 +194,7 @@ export default function HomePage() {
               ))}
             </ul>
           </div>
-          <div className="mav-card" style={{ padding: 24, background: 'var(--ink1)' }}>
+          <div className="mav-card mav-hover-lift mav-glow" style={{ padding: 24, background: 'var(--ink1)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16 }}>
               <span className="mav-eyebrow">Focus group · in progress</span>
               <span className="mav-chip"><span className="mav-chip-dot mav-chip-dot--live" />12 / 12 personas responding</span>
@@ -196,12 +218,12 @@ export default function HomePage() {
               Try "defensible growth" for financial personas — +31% resonance in prior studies.
             </div>
           </div>
-        </div>
+        </Reveal>
       </Section>
 
       <Section eyebrow="05 · Evidence layer" style={{ background: 'var(--ink1)', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: 80, alignItems: 'center' }}>
-          <div className="mav-card" style={{ padding: 0, background: 'var(--ink0)', overflow: 'hidden' }}>
+        <Reveal style={{ display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: 80, alignItems: 'center' }}>
+          <div className="mav-card mav-hover-lift mav-glow" style={{ padding: 0, background: 'var(--ink0)', overflow: 'hidden' }}>
             <div style={{ padding: '14px 18px', borderBottom: '1px solid var(--line)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <span className="mav-eyebrow">Maven · 5-phase research</span>
               <span className="mav-code" style={{ fontSize: 10.5, color: 'var(--muted)' }}>confidence · 0.92 · halluc. risk · low</span>
@@ -219,36 +241,44 @@ export default function HomePage() {
             </div>
           </div>
           <div>
-            <h2 className="mav-h2">Every decision comes with <em>receipts.</em></h2>
+            <h2 className="mav-h2">Every decision comes with <em className="mav-gradient-text">receipts.</em></h2>
             <p className="mav-lede" style={{ marginTop: 24 }}>
               In a world of AI hallucination, Mavera's outputs are defensible.
               Sources cited. Confidence scored. Reasoning transparent. Actions logged.
               Every score shows its contributing factors.
             </p>
-            <div style={{ marginTop: 32, display: 'flex', flexDirection: 'column', gap: 14 }}>
+            <Reveal stagger style={{ marginTop: 32, display: 'flex', flexDirection: 'column', gap: 14 }}>
               {evidencePoints.map(([k, v]) => (
-                <div key={k} style={{ borderLeft: '1.5px solid var(--gold)', paddingLeft: 16 }}>
+                <div key={k} className="mav-evidence-row">
                   <div style={{ fontSize: 14.5, fontWeight: 500, letterSpacing: '-0.01em' }}>{k}</div>
                   <div style={{ fontSize: 13, color: 'var(--dim)', marginTop: 3 }}>{v}</div>
                 </div>
               ))}
-            </div>
+            </Reveal>
           </div>
-        </div>
+        </Reveal>
       </Section>
 
       <Section eyebrow="06 · Platform">
         <div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.1fr', gap: 80, alignItems: 'end', marginBottom: 56 }}>
-            <h2 className="mav-h2">One platform <br />for the <em>full growth cycle.</em></h2>
+          <Reveal style={{ display: 'grid', gridTemplateColumns: '1fr 1.1fr', gap: 80, alignItems: 'end', marginBottom: 56 }}>
+            <h2 className="mav-h2">One platform <br />for the <em className="mav-gradient-text">full growth cycle.</em></h2>
             <p className="mav-lede">
               Market intelligence → audience research → content creation → sales execution → meeting intelligence —
               all powered by the same synthetic layer, all exposed through one OpenAI-compatible API.
             </p>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1, background: 'var(--line)', border: '1px solid var(--line)', borderRadius: 14, overflow: 'hidden' }}>
+          </Reveal>
+          <Reveal stagger style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1, background: 'var(--line)', border: '1px solid var(--line)', borderRadius: 14, overflow: 'hidden' }}>
             {platformCaps.map(([k, v], idx) => (
-              <div key={k} style={{ background: 'var(--ink0)', padding: 22, minHeight: 130, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+              <div
+                key={k}
+                className="mav-sheen mav-surface-lift"
+                style={{
+                  padding: 22, minHeight: 130,
+                  display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
+                  cursor: 'default',
+                }}
+              >
                 <span className="mav-code" style={{ color: 'var(--muted)', fontSize: 10.5, letterSpacing: '.1em' }}>{String(idx + 1).padStart(2, '0')}</span>
                 <div>
                   <div style={{ fontSize: 15, fontWeight: 500, letterSpacing: '-0.01em', marginBottom: 4 }}>{k}</div>
@@ -256,14 +286,14 @@ export default function HomePage() {
                 </div>
               </div>
             ))}
-          </div>
+          </Reveal>
         </div>
       </Section>
 
       <Section eyebrow="07 · Developers" style={{ background: 'var(--ink1)', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)' }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 72, alignItems: 'center' }}>
+        <Reveal style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 72, alignItems: 'center' }}>
           <div>
-            <h2 className="mav-h2"><em>OpenAI-compatible.</em><br />Change one line.</h2>
+            <h2 className="mav-h2"><em className="mav-gradient-text">OpenAI-compatible.</em><br />Change one line.</h2>
             <p className="mav-lede" style={{ marginTop: 24 }}>
               Drop-in replacement for the Responses API. Same SDKs you already use — Python, JavaScript, Go —
               plus a <span style={{ color: 'var(--text)' }}>persona_id</span> parameter that transforms the model into
@@ -285,13 +315,13 @@ export default function HomePage() {
             </div>
           </div>
           <CodeCard />
-        </div>
+        </Reveal>
       </Section>
 
       <Section eyebrow="08 · Enterprise trust">
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 72, alignItems: 'center' }}>
+        <Reveal style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 72, alignItems: 'center' }}>
           <div>
-            <h2 className="mav-h2">Built for <em>enterprise</em> from day one.</h2>
+            <h2 className="mav-h2">Built for <em className="mav-gradient-text">enterprise</em> from day one.</h2>
             <p className="mav-lede" style={{ marginTop: 24 }}>
               Most AI startups at our stage don't hold the certifications we do.
               Nine paying enterprise customers. Pipeline with household names.
@@ -301,7 +331,7 @@ export default function HomePage() {
               <CertBadges />
             </div>
           </div>
-          <div className="mav-card" style={{ padding: 28, background: 'var(--ink1)' }}>
+          <div className="mav-card mav-hover-lift mav-glow" style={{ padding: 28, background: 'var(--ink1)' }}>
             <div className="mav-eyebrow" style={{ marginBottom: 20 }}>Trust · Live posture</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               {trustRows.map(([k, v]) => (
@@ -313,18 +343,18 @@ export default function HomePage() {
             </div>
             <a href="#" className="mav-btn mav-btn--ghost mav-btn--sm" style={{ marginTop: 20 }}>Open trust portal <ArrowUpRight /></a>
           </div>
-        </div>
+        </Reveal>
       </Section>
 
       <Section eyebrow="09 · Pricing" style={{ paddingTop: 40 }}>
         <div>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', marginBottom: 48, gap: 48, flexWrap: 'wrap' }}>
-            <h2 className="mav-h2" style={{ fontSize: 48 }}>Transparent pricing. <em>Pay for what you use.</em></h2>
+          <Reveal style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', marginBottom: 48, gap: 48, flexWrap: 'wrap' }}>
+            <h2 className="mav-h2" style={{ fontSize: 48 }}>Transparent pricing. <em className="mav-gradient-text">Pay for what you use.</em></h2>
             <p className="mav-lede" style={{ maxWidth: 420 }}>Credit-based. Every API response shows its cost. No hidden line items.</p>
-          </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
+          </Reveal>
+          <Reveal stagger style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
             {tiers.map(t => (
-              <div key={t.name} style={{
+              <TiltCard key={t.name} className="mav-hover-lift" intensity={t.highlight ? 5 : 3} style={{
                 background: t.highlight ? 'var(--ink2)' : 'var(--ink1)',
                 border: `1px solid ${t.highlight ? 'var(--gold-dim)' : 'var(--line)'}`,
                 borderRadius: 14, padding: 28, position: 'relative',
@@ -342,17 +372,19 @@ export default function HomePage() {
                     <li key={f} style={{ fontSize: 13, color: 'var(--dim)', display: 'flex', gap: 10 }}><Check size={13} />{f}</li>
                   ))}
                 </ul>
-                <Link href="/pricing" className={`mav-btn ${t.highlight ? 'mav-btn--primary' : 'mav-btn--ghost'}`} style={{ marginTop: 28, width: '100%', justifyContent: 'center' }}>
+                <Link href="/pricing" className={`mav-btn ${t.highlight ? 'mav-btn--primary mav-shimmer' : 'mav-btn--ghost'}`} style={{ marginTop: 28, width: '100%', justifyContent: 'center' }}>
                   {t.name === 'Enterprise' ? 'Talk to sales' : 'Start free trial'}
                 </Link>
-              </div>
+              </TiltCard>
             ))}
-          </div>
+          </Reveal>
         </div>
       </Section>
 
       <Section dense style={{ padding: '120px 0' }}>
-        <ClosingCTA />
+        <Reveal variant="scale">
+          <ClosingCTA />
+        </Reveal>
       </Section>
 
       <MavFooter />

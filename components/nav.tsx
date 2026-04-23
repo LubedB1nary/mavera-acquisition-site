@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { MavLogo } from './logo';
@@ -38,7 +38,21 @@ const platformCols = [
 
 export function MavNav() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [progress, setProgress] = useState(0);
   const pathname = usePathname();
+
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 12);
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(max > 0 ? Math.min(1, y / max) : 0);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const navItems = [
     { href: null, label: 'Platform', hasMenu: true },
@@ -51,12 +65,24 @@ export function MavNav() {
     <header
       style={{
         position: 'sticky', top: 0, zIndex: 40,
-        backdropFilter: 'blur(18px) saturate(1.3)', WebkitBackdropFilter: 'blur(18px) saturate(1.3)',
-        background: 'rgba(7,8,10,0.72)',
-        borderBottom: '1px solid var(--line)',
+        backdropFilter: scrolled ? 'blur(22px) saturate(1.5)' : 'blur(14px) saturate(1.2)',
+        WebkitBackdropFilter: scrolled ? 'blur(22px) saturate(1.5)' : 'blur(14px) saturate(1.2)',
+        background: scrolled ? 'rgba(7,8,10,0.85)' : 'rgba(7,8,10,0.55)',
+        borderBottom: scrolled ? '1px solid var(--line)' : '1px solid transparent',
+        transition: 'background .25s ease, border-color .25s ease, backdrop-filter .25s ease',
       }}
       onMouseLeave={() => setMenuOpen(false)}
     >
+      <div
+        aria-hidden
+        style={{
+          position: 'absolute', left: 0, right: 0, bottom: -1, height: 2,
+          background: 'linear-gradient(90deg, var(--gold) 0%, var(--gold-soft) 100%)',
+          transform: `scaleX(${progress})`, transformOrigin: '0 50%',
+          transition: 'transform .15s linear', opacity: scrolled ? 1 : 0,
+          pointerEvents: 'none', boxShadow: '0 0 18px rgba(200,168,255,0.45)',
+        }}
+      />
       <div className="mav-container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: 64 }}>
         <Link href="/" style={{ cursor: 'pointer' }}>
           <MavLogo size={18} />

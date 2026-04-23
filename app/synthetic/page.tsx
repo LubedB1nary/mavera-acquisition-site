@@ -14,12 +14,12 @@ const generationStack: [string, string][] = [
 ];
 
 const scientific: [string, string][] = [
-  ['Clinical assays', 'Wet-lab and LC-MS assay data with physics-constrained variance matching.'],
-  ['Molecular series', 'Proteins, SMILES, ligand design with geometric priors.'],
-  ['Time series', 'Physiological, IoT, finance — seasonal and regime-aware.'],
-  ['Imaging', 'Histology and radiology latents with pathology-aware features.'],
-  ['Tabular EHR', 'SDV + CTGAN ensemble with k-anonymity by default.'],
-  ['Narrative / notes', 'Clinical notes, abstracts, rationales — style-anchored, redacted.'],
+  ['Time series', 'Operational, IoT, finance — seasonal and regime-aware.'],
+  ['Tabular records', 'SDV + CTGAN ensemble with k-anonymity by default. Customer, transactional, behavioral.'],
+  ['Behavioral panels', 'Synthetic respondent populations matched to real survey distributions.'],
+  ['Imaging latents', 'Vision-model-friendly latents with domain-aware feature anchors.'],
+  ['Text / narrative', 'Notes, summaries, rationales — style-anchored, redacted, source-attributed.'],
+  ['Domain assays', 'Physics-constrained generation with variance matching for scientific use cases.'],
 ];
 
 const publications: [string, string, string][] = [
@@ -27,7 +27,7 @@ const publications: [string, string, string][] = [
   ['2026', 'OASIS: a benchmark for synthetic audience validation', 'NeurIPS Datasets & Benchmarks'],
   ['2025', 'Molecular design via LLM-steered latent optimization', 'JCIM'],
   ['2025', 'Provenance as a first-class citizen in synthetic data pipelines', 'MLSys'],
-  ['2024', 'Fidelity vs privacy tradeoffs in clinical tabular synthesis', 'AMIA'],
+  ['2024', 'Fidelity vs privacy tradeoffs in tabular synthesis at scale', 'KDD'],
 ];
 
 export default function SyntheticPage() {
@@ -42,8 +42,8 @@ export default function SyntheticPage() {
             Synthetic data <em>that holds up.</em>
           </h1>
           <p className="mav-lede" style={{ maxWidth: 640, marginTop: 26 }}>
-            Marketing panels, scientific assays, tabular EHR, molecular series — generated under privacy budgets, evaluated
-            on nine metrics per run, shipped with a provenance graph you can defend.
+            Behavioral panels, tabular records, time series, text and imaging latents — generated under privacy budgets,
+            evaluated on nine metrics per run, shipped with a provenance graph you can defend.
           </p>
           <div style={{ display: 'flex', gap: 12, marginTop: 36 }}>
             <a href="#" className="mav-btn mav-btn--primary">Request pilot dataset <ArrowRight /></a>

@@ -16,11 +16,11 @@ const pipelineStages: [string, string, string][] = [
 ];
 
 const modalities: [string, string, string, string][] = [
-  ['Time series', 'Physiological · IoT · finance', 'Autoregressive · seasonal · regime-aware', 'loss: 0.084 · FID: 0.12'],
-  ['Molecular', 'Proteins · SMILES · binders', 'Geometric · equivariant · property-targeted', 'Tanimoto: 0.71'],
-  ['Assay', 'Clinical · wet-lab · LC-MS', 'Physics-constrained · variance-matched', 'parity: ±3.2%'],
-  ['Imaging', 'Histology · radiology', 'Latent-diffusion · pathology-aware', 'FID: 8.4'],
-  ['Tabular', 'EHR · claims · ops data', 'SDV+CTGAN ensemble · k-anonymity', 'MCC: 0.88'],
+  ['Time series', 'Operational · IoT · finance', 'Autoregressive · seasonal · regime-aware', 'loss: 0.084 · FID: 0.12'],
+  ['Behavioral', 'Survey · panel · response data', 'Persona-conditioned · cohort-anchored', 'parity: ±2.8%'],
+  ['Domain assays', 'Sensor · scientific · process', 'Physics-constrained · variance-matched', 'parity: ±3.2%'],
+  ['Imaging', 'Latents for vision models', 'Latent-diffusion · domain-aware', 'FID: 8.4'],
+  ['Tabular', 'Customer · transactional · ops data', 'SDV+CTGAN ensemble · k-anonymity', 'MCC: 0.88'],
   ['Text', 'Notes · abstracts · rationales', 'LLM-steered · style-anchored', 'ROUGE-L: 0.61'],
 ];
 
@@ -42,7 +42,7 @@ const publications: [string, string, string][] = [
   ['2025', 'Molecular design via LLM-steered latent optimization',                        'JCIM'],
   ['2025', 'Provenance as a first-class citizen in synthetic data pipelines',             'MLSys'],
   ['2025', 'Audit trails for autonomous agents: a privacy-preserving framework',          'IEEE S&P'],
-  ['2024', 'Fidelity vs privacy tradeoffs in clinical tabular synthesis',                 'AMIA'],
+  ['2024', 'Fidelity vs privacy tradeoffs in tabular synthesis at scale',                 'KDD'],
   ['2024', 'Counterfactual panel generation for consumer behavior modeling',              'KDD'],
 ];
 
@@ -65,7 +65,7 @@ function HeroViz() {
   return (
     <div className="mav-card" style={{ padding: 24, overflow: 'hidden', background: 'var(--ink0)' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 18 }}>
-        <span className="mav-eyebrow">Run · 2026-04-22 · assay-gen-v4</span>
+        <span className="mav-eyebrow">Run · 2026-04-22 · tabular-gen-v4</span>
         <span className="mav-chip"><span className="mav-chip-dot mav-chip-dot--live" />epoch 42 / 60</span>
       </div>
       <svg viewBox="0 0 600 220" width="100%" height="220" style={{ display: 'block' }}>
@@ -216,7 +216,7 @@ export default function SciencePage() {
         <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: 48, alignItems: 'center' }}>
           <div className="mav-card" style={{ background: 'var(--ink0)', padding: 0, overflow: 'hidden' }}>
             <div style={{ padding: '14px 20px', borderBottom: '1px solid var(--line)', display: 'flex', justifyContent: 'space-between' }}>
-              <span className="mav-eyebrow">Eval report · assay-gen-v4 · run #1428</span>
+              <span className="mav-eyebrow">Eval report · tabular-gen-v4 · run #1428</span>
               <span className="mav-code" style={{ fontSize: 11, color: '#7ce0a8' }}>8 pass · 1 warn</span>
             </div>
             <div>
@@ -293,8 +293,8 @@ export default function SciencePage() {
             { id: 'registry', name: 'Registry', cat: 'Ops', desc: 'Model + dataset lineage.' },
           ]}
           scripts={[
-            { title: '"Generate 10k synthetic COVID assays matched to site"', steps: ['research', 'generators', 'evals', 'registry'] },
-            { title: '"Fine-tune a molecular generator on our series 4 binders"', steps: ['notebooks', 'vault', 'compute', 'evals', 'deploy'] },
+            { title: '"Generate 10k synthetic transactional records matched to region"', steps: ['research', 'generators', 'evals', 'registry'] },
+            { title: '"Fine-tune a forecasting model on our last 18 months of demand data"', steps: ['notebooks', 'vault', 'compute', 'evals', 'deploy'] },
             { title: '"Audit the bias deltas on our last 3 model checkpoints"', steps: ['evals', 'research', 'registry'] },
           ]}
         />

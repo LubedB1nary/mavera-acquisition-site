@@ -30,7 +30,7 @@ export default function MavenPage() {
       scripts={[
         { title: '"Find me 5 accounts ready to buy this week"', steps: ['websearch', 'research', 'panel', 'crm', 'email'] },
         { title: '"Run a 200-persona focus group on this hero copy"', steps: ['panel', 'research', 'docs', 'notify'] },
-        { title: '"Watch for CLIA filings and alert me"', steps: ['websearch', 'research', 'outcomes', 'notify'] },
+        { title: '"Watch for Series B announcements in logistics and alert me"', steps: ['websearch', 'research', 'outcomes', 'notify'] },
         { title: '"Prep me for my 3pm with Quest"', steps: ['meetings', 'research', 'crm', 'docs', 'notify'] },
       ]}
       sections={[

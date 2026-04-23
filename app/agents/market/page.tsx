@@ -6,7 +6,7 @@ export default function MarketPage() {
       eyebrow="market"
       name="Market intel"
       tagline={<>Every signal, <em>watched.</em></>}
-      lede="Continuous monitoring across 295K+ sources — news, regulatory filings, payer policy, competitor moves, PE activity. Signals scored, deduplicated, routed to the right agent."
+      lede="Continuous monitoring across 295K+ sources — news, regulatory filings, executive hires, competitor moves, PE activity. Signals scored, deduplicated, routed to the right agent."
       metrics={[
         ['295K+', 'Sources monitored'],
         ['60s', 'Median signal latency'],
@@ -19,10 +19,10 @@ export default function MarketPage() {
           body: (
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
               {[
-                ['Regulatory', 'CLIA · FDA · CMS · LCD · state licensure changes'],
-                ['Payer', 'Policy updates · contract changes · coverage shifts'],
-                ['Competitor', 'Product launches · pricing · org changes · hiring'],
-                ['Financial', 'Earnings · PE activity · restructuring · bankruptcy'],
+                ['Funding', 'Series A/B/C/D · seed · grants · IPO filings · S-1 commentary'],
+                ['Hiring', 'Executive moves · key role openings · team scale-ups'],
+                ['Competitor', 'Product launches · pricing · org changes · partnership news'],
+                ['Financial', 'Earnings · PE activity · restructuring · M&A activity'],
                 ['Editorial', 'Key voice posts · industry newsletters · podcasts'],
                 ['Technical', 'Patents · preprints · standards changes'],
               ].map(([k, v]) => (

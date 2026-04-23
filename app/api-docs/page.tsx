@@ -13,7 +13,7 @@ const endpoints: [string, string, string][] = [
   ['/v1/meetings',         'Transcribe + extract · structured output',       '6'],
   ['/v1/voice',            'Brand voice extraction + generation',            '2–5'],
   ['/v1/signals',          'Live signal scan over 295K+ sources',            '0.1/hr'],
-  ['/v1/agents/sales',     'Run the Glengarry pipeline on a signal',         '18–30'],
+  ['/v1/agents/sales',     'Run the Argus pipeline on a signal',             '18–30'],
   ['/v1/synthetic',        'Generate synthetic data · all modalities',       '3–8'],
   ['/v1/outcomes',         'Spawn an outcome · schedule · wake-up',          '3/wake'],
   ['/v1/crm',              'Query the owned-CRM surface',                    '1'],
@@ -43,8 +43,9 @@ export default function ApiPage() {
                   <li key={t} style={{ fontSize: 14, color: 'var(--dim)', display: 'flex', gap: 10 }}><Check size={14} />{t}</li>
                 ))}
               </ul>
-              <div style={{ display: 'flex', gap: 12, marginTop: 36 }}>
-                <a href="#" className="mav-btn mav-btn--primary">Get API key <ArrowRight /></a>
+              <div style={{ display: 'flex', gap: 12, marginTop: 36, flexWrap: 'wrap' }}>
+                <a href="#" className="mav-btn mav-btn--primary">Get API key · free <ArrowRight /></a>
+                <a href="/pricing#api" className="mav-btn mav-btn--ghost">See API pricing</a>
                 <a href="#" className="mav-btn mav-btn--ghost">docs.mavera.io</a>
               </div>
             </div>
@@ -68,6 +69,37 @@ export default function ApiPage() {
         </div>
       </Section>
 
+      <Section eyebrow="API plans">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16 }}>
+          {[
+            { name: 'Developer', price: '$0',   unit: '/mo', credits: '100 credits / month',    blurb: 'Free forever. Build, prototype, share.',           cta: 'Get API key · free' },
+            { name: 'Build',     price: '$99',  unit: '/mo', credits: '2,000 credits / month',  blurb: 'For production apps and indie shipping.',          cta: 'Start Build trial', highlight: true },
+            { name: 'Scale',     price: '$999', unit: '/mo', credits: '25,000 credits / month', blurb: 'For revenue-generating products at volume.',       cta: 'Start Scale trial' },
+          ].map(t => (
+            <div key={t.name} style={{
+              background: t.highlight ? 'var(--ink2)' : 'var(--ink1)',
+              border: `1px solid ${t.highlight ? 'var(--gold-dim)' : 'var(--line)'}`,
+              borderRadius: 14, padding: 24, position: 'relative',
+            }}>
+              {t.highlight && <span style={{ position: 'absolute', top: 14, right: 14, fontFamily: 'var(--mono)', fontSize: 10, color: 'var(--gold)', letterSpacing: '.1em' }}>RECOMMENDED</span>}
+              <div className="mav-eyebrow" style={{ marginBottom: 8 }}>{t.name}</div>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
+                <span style={{ fontSize: 36, letterSpacing: '-0.03em', fontWeight: 500 }}>{t.price}</span>
+                <span style={{ fontSize: 13, color: 'var(--muted)' }}>{t.unit}</span>
+              </div>
+              <div style={{ fontSize: 12.5, color: 'var(--dim)', marginTop: 4, fontFamily: 'var(--mono)' }}>{t.credits}</div>
+              <div style={{ fontSize: 12.5, color: 'var(--muted)', marginTop: 6, lineHeight: 1.5 }}>{t.blurb}</div>
+              <a href="/pricing#api" className={`mav-btn ${t.highlight ? 'mav-btn--primary mav-shimmer' : 'mav-btn--ghost'} mav-btn--sm`} style={{ marginTop: 18, width: '100%', justifyContent: 'center' }}>
+                {t.cta}
+              </a>
+            </div>
+          ))}
+        </div>
+        <div style={{ marginTop: 16, fontSize: 12.5, color: 'var(--muted)', textAlign: 'center', fontFamily: 'var(--mono)', letterSpacing: '.04em' }}>
+          full plan details, overage rates, and rate limits → <a href="/pricing#api" style={{ color: 'var(--gold)', borderBottom: '1px solid var(--gold-dim)' }}>/pricing#api</a>
+        </div>
+      </Section>
+
       <Section eyebrow="Templates · non-developer path" style={{ background: 'var(--ink1)', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
           <div>
@@ -80,7 +112,7 @@ export default function ApiPage() {
               {[
                 'market_watch · monitor + alert',
                 'adp_feedback · persona-calibrated creative test',
-                'lab_director_outbound · signal → letter',
+                'exec_outbound · signal → letter',
                 'meeting_brief · transcript → brief',
                 'competitor_move · signal → reply draft',
               ].map(t => <li key={t} className="mav-code" style={{ fontSize: 13, color: 'var(--dim)' }}>→ {t}</li>)}
