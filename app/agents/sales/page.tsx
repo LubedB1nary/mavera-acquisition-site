@@ -6,6 +6,8 @@ import { Section } from '@/components/section';
 import { ClosingCTA } from '@/components/closing-cta';
 import { AgentDemo } from '@/components/agent-demo';
 import { PipelineRow } from '@/components/pipeline-row';
+import { AsciiTorus } from '@/components/ascii-torus';
+import { AsciiTelemetry } from '@/components/ascii-telemetry';
 import { ArrowRight } from '@/components/icons';
 
 const stages = [
@@ -71,7 +73,7 @@ export default function SalesAgentsPage() {
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(ellipse 900px 500px at 70% 30%, rgba(200,168,255,0.12), transparent 60%)' }} />
         <div className="mav-container" style={{ position: 'relative', zIndex: 2 }}>
           <div className="mav-eyebrow" style={{ marginBottom: 24 }}>/ agents / sales</div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: 64, alignItems: 'center' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'minmax(0, 1.05fr) minmax(440px, 540px)', gap: 64, alignItems: 'start' }}>
             <div>
               <h1 className="mav-h1" style={{ fontSize: 76 }}>The <em>Argus</em> flywheel.</h1>
               <p className="mav-lede" style={{ maxWidth: 540, marginTop: 28 }}>
@@ -83,7 +85,20 @@ export default function SalesAgentsPage() {
                 <a href="#" className="mav-btn mav-btn--ghost">See the API</a>
               </div>
             </div>
-            <StageRail />
+            {/* Argus orbit: 3D ASCII torus with three orbiting satellites + live telemetry readout */}
+            <div
+              aria-hidden
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                gap: 8,
+                paddingTop: 4,
+              }}
+            >
+              <AsciiTorus cols={70} rows={26} scale={1.05} />
+              <AsciiTelemetry />
+            </div>
           </div>
         </div>
       </section>
@@ -93,17 +108,10 @@ export default function SalesAgentsPage() {
       </Section>
 
       <Section eyebrow="Flywheel">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: 1, background: 'var(--line)', border: '1px solid var(--line)', borderRadius: 14, overflow: 'hidden' }}>
-          {stages.map(s => (
-            <div key={s.n} style={{ background: 'var(--ink0)', padding: 18, minHeight: 180, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-              <span className="mav-code" style={{ color: 'var(--gold)', fontSize: 11 }}>{s.n}</span>
-              <div>
-                <div style={{ fontSize: 13, fontWeight: 500, letterSpacing: '-0.01em', marginBottom: 6 }}>{s.agent}</div>
-                <div style={{ fontSize: 11, color: 'var(--muted)', fontFamily: 'var(--mono)', lineHeight: 1.4 }}>{s.artifact.split(' · ')[0]}</div>
-              </div>
-            </div>
-          ))}
+        <div style={{ marginBottom: 28, maxWidth: 720 }}>
+          <h2 className="mav-h2">Seven agents. One loop. Always running.</h2>
         </div>
+        <StageRail />
       </Section>
 
       <Section eyebrow="Live run" style={{ background: 'var(--ink1)', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)' }}>
