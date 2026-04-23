@@ -5,6 +5,8 @@ import { ArrowRight, ArrowUpRight } from './icons';
 import { CountUp } from './reveal';
 import { AsciiTorus } from './ascii-torus';
 import { AsciiRain } from './ascii-rain';
+import { AsciiTelemetry } from './ascii-telemetry';
+import { AsciiWaveform } from './ascii-waveform';
 import { useMode } from './mode-context';
 
 const HEADLINE_WORDS = ['Agents', 'that', 'walk'];
@@ -269,7 +271,7 @@ export function HomeHero() {
             </div>
           </div>
 
-          {/* right column: ASCII torus, no chrome — just floats with shadow */}
+          {/* right column: ASCII torus + live telemetry */}
           {isAscii && (
             <div
               style={{
@@ -277,19 +279,40 @@ export function HomeHero() {
                 animation: 'mav-rise-soft 1.1s cubic-bezier(.2,.7,.2,1) .35s forwards',
                 position: 'relative',
                 display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'flex-start',
+                flexDirection: 'column',
+                justifyContent: 'flex-start',
+                alignItems: 'center',
                 paddingTop: 4,
+                gap: 8,
               }}
             >
               <AsciiTorus cols={70} rows={26} scale={1.05} />
+              <AsciiTelemetry />
             </div>
           )}
         </div>
 
+        {/* full-width pulse waveform — only in ascii mode, sits above the stats grid */}
+        {isAscii && (
+          <div
+            style={{
+              marginTop: 72,
+              opacity: 0,
+              animation: 'mav-rise-soft 1s cubic-bezier(.2,.7,.2,1) 1.1s forwards',
+            }}
+          >
+            <AsciiWaveform
+              width={148}
+              height={6}
+              fontSize={11}
+              caption="argus · system pulse · last 60s"
+            />
+          </div>
+        )}
+
         <div
           style={{
-            marginTop: 96, display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 32,
+            marginTop: isAscii ? 40 : 96, display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 32,
             borderTop: '1px solid var(--line)', paddingTop: 32, position: 'relative',
             opacity: 0,
             animation: 'mav-rise-soft 1s cubic-bezier(.2,.7,.2,1) 1.25s forwards',

@@ -16,6 +16,27 @@ import { useEffect, useRef } from 'react';
 const RAMP = '.,-~:;=!*#$@';
 const HI_RAMP_START = 8; // any luminance index >= this goes to the highlight overlay
 
+// Three satellites that orbit the torus on tilted planes. They're occluded by
+// the donut via the same z-buffer, so they appear to pass behind it. A short
+// trail is drawn behind each, fading into the base layer.
+type Satellite = {
+  r: number;       // orbital radius (must be < 5 to stay in front of the camera)
+  speed: number;   // radians per second
+  tilt: number;    // tilt of the orbital plane around X
+  phase: number;   // initial angle
+  glyph: string;   // single-char satellite head
+};
+
+const SATELLITES: Satellite[] = [
+  { r: 3.6, speed: 0.55,  tilt: 0.32,  phase: 0,            glyph: 'o' },
+  { r: 4.2, speed: -0.38, tilt: -0.18, phase: Math.PI / 2,  glyph: '*' },
+  { r: 4.7, speed: 0.24,  tilt: 0.55,  phase: Math.PI,      glyph: '+' },
+];
+
+const TRAIL_LEN = 7;
+const TRAIL_DT_S = 0.045;
+const DOT_CODE = 46; // '.'
+
 type Props = {
   className?: string;
   spinA?: number;     // base spin speed on x
@@ -143,6 +164,44 @@ export function AsciiTorus({
             const ch = RAMP.charCodeAt(idx);
             buf[o] = ch;
             if (idx >= HI_RAMP_START) hiBuf[o] = ch;
+          }
+        }
+      }
+
+      // ── orbital satellites pass ──
+      // walk each sat from oldest trail step to newest so the head wins z-tests.
+      const tNow = now / 1000;
+      for (let si = 0; si < SATELLITES.length; si++) {
+        const s = SATELLITES[si];
+        const cosT = Math.cos(s.tilt);
+        const sinT = Math.sin(s.tilt);
+        for (let k = TRAIL_LEN; k >= 0; k--) {
+          const theta = s.phase + s.speed * (tNow - k * TRAIL_DT_S);
+          const cosTh = Math.cos(theta);
+          const sinTh = Math.sin(theta);
+          // body-frame point on tilted orbital ring
+          const sx0 = s.r * cosTh;
+          const sy0 = s.r * sinTh * cosT;
+          const sz0 = s.r * sinTh * sinT;
+          // apply A around X (mixes y, z) — same as donut.c torus
+          const sy1 = sy0 * cosA - sz0 * sinA;
+          const sz1 = sy0 * sinA + sz0 * cosA;
+          const den = sz1 + 5;
+          if (den < 0.6) continue; // would project behind camera
+          const D = 1 / den;
+          const xp = ((W / 2) + X_SCALE * D * (sx0 * cosB - sy1 * sinB)) | 0;
+          const yp = ((H / 2) + Y_SCALE * D * (sx0 * sinB + sy1 * cosB)) | 0;
+          if (xp < 0 || xp >= W || yp < 0 || yp >= H) continue;
+          const o = xp + W * yp;
+          if (D <= z[o]) continue; // hidden behind torus
+          z[o] = D;
+          if (k === 0) {
+            const code = s.glyph.charCodeAt(0);
+            buf[o] = code;
+            hiBuf[o] = code;
+          } else {
+            // trail dot — base layer only, dim
+            buf[o] = DOT_CODE;
           }
         }
       }
