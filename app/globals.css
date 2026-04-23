@@ -485,6 +485,180 @@ button { font-family: inherit; }
   transform: translateY(-2px);
 }
 
+/* ───────────────────────── ASCII art system ───────────────────────── */
+
+/* AsciiTorus — base */
+.mav-ascii-torus pre { font-variant-ligatures: none; tab-size: 1; }
+
+/* AsciiFrame — terminal bracket corners that draw in on scroll */
+.mav-ascii-frame { font-family: var(--mono); }
+
+.mav-af-glyph {
+  position: absolute;
+  font-family: var(--mono);
+  font-size: 14px;
+  line-height: 1;
+  color: var(--gold);
+  text-shadow: 0 0 8px rgba(200,168,255,0.55), 0 0 18px rgba(200,168,255,0.18);
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.6);
+}
+.mav-af-glyph--tl { top: -2px; left: -2px; }
+.mav-af-glyph--tr { top: -2px; right: -2px; }
+.mav-af-glyph--bl { bottom: -2px; left: -2px; }
+.mav-af-glyph--br { bottom: -2px; right: -2px; }
+
+.mav-ascii-frame.is-drawn .mav-af-glyph { animation: mav-af-pop .4s cubic-bezier(.2,.7,.2,1) forwards; }
+.mav-ascii-frame.is-drawn .mav-af-glyph--tl { animation-delay: .05s; }
+.mav-ascii-frame.is-drawn .mav-af-glyph--tr { animation-delay: .12s; }
+.mav-ascii-frame.is-drawn .mav-af-glyph--bl { animation-delay: .25s; }
+.mav-ascii-frame.is-drawn .mav-af-glyph--br { animation-delay: .32s; }
+
+@keyframes mav-af-pop {
+  0% { opacity: 0; transform: scale(0.6); }
+  60% { opacity: 1; transform: scale(1.18); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.mav-af-bar {
+  position: absolute;
+  pointer-events: none;
+  background: linear-gradient(90deg, var(--gold-dim), rgba(200,168,255,0.55), var(--gold-dim));
+  opacity: 0;
+}
+.mav-af-bar--t,
+.mav-af-bar--b {
+  height: 1px;
+  left: 8px;
+  right: 8px;
+}
+.mav-af-bar--l,
+.mav-af-bar--r {
+  width: 1px;
+  top: 8px;
+  bottom: 8px;
+  background: linear-gradient(180deg, var(--gold-dim), rgba(200,168,255,0.45), var(--gold-dim));
+}
+.mav-af-bar--t { top: 4px; }
+.mav-af-bar--b { bottom: 4px; }
+.mav-af-bar--l { left: 4px; }
+.mav-af-bar--r { right: 4px; }
+
+.mav-ascii-frame.is-drawn .mav-af-bar--t,
+.mav-ascii-frame.is-drawn .mav-af-bar--b {
+  animation: mav-af-grow-h .55s cubic-bezier(.2,.7,.2,1) both;
+}
+.mav-ascii-frame.is-drawn .mav-af-bar--l,
+.mav-ascii-frame.is-drawn .mav-af-bar--r {
+  animation: mav-af-grow-v .55s cubic-bezier(.2,.7,.2,1) both;
+}
+.mav-ascii-frame.is-drawn .mav-af-bar--t { animation-delay: .15s; }
+.mav-ascii-frame.is-drawn .mav-af-bar--r { animation-delay: .22s; }
+.mav-ascii-frame.is-drawn .mav-af-bar--b { animation-delay: .35s; transform-origin: right; }
+.mav-ascii-frame.is-drawn .mav-af-bar--l { animation-delay: .42s; transform-origin: bottom; }
+
+@keyframes mav-af-grow-h {
+  0% { opacity: 0; transform: scaleX(0); transform-origin: left; }
+  100% { opacity: 1; transform: scaleX(1); transform-origin: left; }
+}
+@keyframes mav-af-grow-v {
+  0% { opacity: 0; transform: scaleY(0); transform-origin: top; }
+  100% { opacity: 1; transform: scaleY(1); transform-origin: top; }
+}
+
+.mav-af-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--mono);
+  font-size: 10.5px;
+  color: var(--muted);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin: -8px 0 16px;
+  position: relative;
+  z-index: 1;
+}
+.mav-af-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--gold);
+  text-shadow: 0 0 8px rgba(200,168,255,0.4);
+  padding: 2px 8px;
+  background: var(--ink0);
+  margin-left: -6px;
+  animation: mav-af-blink 2.4s ease-in-out infinite;
+}
+.mav-af-label {
+  color: var(--dim);
+  padding: 2px 8px;
+  background: var(--ink0);
+  margin-right: -6px;
+}
+
+@keyframes mav-af-blink {
+  0%, 60%, 100% { opacity: 1; }
+  62%, 64% { opacity: 0.3; }
+}
+
+/* AsciiDivider scroll */
+.mav-ascii-divider__scroll {
+  animation: mav-divider-scroll 28s linear infinite;
+}
+@keyframes mav-divider-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-30%); }
+}
+
+/* AsciiRain — small extra so text lines up tighter */
+.mav-ascii-rain pre { font-variant-ligatures: none; }
+
+/* AsciiTorus container — pedestal glow */
+.mav-ascii-torus::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -22px;
+  transform: translateX(-50%);
+  width: 70%;
+  height: 28px;
+  background: radial-gradient(ellipse at center, rgba(200,168,255,0.20), transparent 70%);
+  filter: blur(4px);
+  pointer-events: none;
+}
+
+/* CRT scanline overlay you can drop on any block */
+.mav-scanline {
+  position: relative;
+}
+.mav-scanline::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255,255,255,0.025) 0 1px,
+    transparent 1px 3px
+  );
+  mix-blend-mode: screen;
+}
+
+/* ASCII-styled chip wrapper: square brackets */
+.mav-ascii-chip {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--dim);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.mav-ascii-chip::before { content: '['; color: var(--gold); }
+.mav-ascii-chip::after { content: ']'; color: var(--gold); }
+
 /* respect motion preferences */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

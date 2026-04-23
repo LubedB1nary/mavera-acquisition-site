@@ -1,6 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { Check } from './icons';
+import { AsciiWaveform } from './ascii-waveform';
 
 const AGENT_STEPS = [
   { agent: 'Signal Scanner', code: '01', title: 'Signal detected', narr: 'A funding announcement crosses our radar. Tagged, deduped, scored 0–100 by relevance.', artifact: 'signal' },
@@ -292,6 +293,13 @@ export function AgentDemo({ compact = false }: { compact?: boolean }) {
 
       <div key={step.artifact} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
         <Artifact kind={step.artifact} />
+        <AsciiWaveform
+          width={64}
+          height={7}
+          fontSize={11}
+          caption="signal · realtime trace"
+          pulseRate={1.6}
+        />
         <div style={{
           border: '1px dashed var(--line)', borderRadius: 10, padding: '10px 14px',
           display: 'flex', alignItems: 'center', gap: 10,

@@ -41,6 +41,28 @@ export function ClosingCTA() {
             style={{ animation: 'mav-pulse 2.4s ease-in-out infinite' }} />
         </svg>
 
+        <div
+          aria-hidden
+          style={{
+            fontFamily: 'var(--mono)',
+            fontSize: 13,
+            letterSpacing: '0.4em',
+            color: 'var(--gold-soft)',
+            opacity: 0.55,
+            margin: '0 auto 18px',
+            textShadow: '0 0 8px rgba(200,168,255,0.4)',
+            display: 'inline-block',
+            animation: 'mav-shimmer 6s ease-in-out infinite',
+            background: 'linear-gradient(90deg, transparent, rgba(220,196,255,0.9) 35%, rgba(220,196,255,0.9) 65%, transparent)',
+            WebkitBackgroundClip: 'text',
+            backgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundSize: '200% 100%',
+          }}
+        >
+          ◈ · ┄ ─ ─ ┄ · ◌ ◯ ◉ ◯ ◌ · ┄ ─ ─ ┄ · ◈
+        </div>
+
         <h2 className="mav-h2" style={{ fontSize: 56, maxWidth: 800, margin: '0 auto' }}>
           The door to <em className="mav-gradient-text">growth</em> is open.
         </h2>
