@@ -487,6 +487,18 @@ button { font-family: inherit; }
 
 /* ───────────────────────── ASCII art system ───────────────────────── */
 
+/* Mode visibility — driven by html[data-mode="..."]. The inline script in
+   layout.tsx sets this attribute synchronously in <head>, before paint, so
+   no flash of wrong content. Default-shown content uses no class at all;
+   mode-specific content is opted in/out with these helpers. */
+.mav-ascii-only { display: none !important; }
+html[data-mode="ascii"] .mav-ascii-only { display: revert !important; }
+html[data-mode="ascii"] .mav-classic-only { display: none !important; }
+
+/* When ascii mode is active, slightly drop the warmth on certain regions for a
+   more terminal-honest palette (subtle, optional) */
+html[data-mode="ascii"] body { background: #060709; }
+
 /* AsciiTorus — base */
 .mav-ascii-torus pre { font-variant-ligatures: none; tab-size: 1; }
 

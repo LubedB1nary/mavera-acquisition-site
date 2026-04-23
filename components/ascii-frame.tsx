@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
+import { useMode } from './mode-context';
 
 /**
  * AsciiFrame — wraps content with terminal-style corner brackets that
@@ -38,11 +39,12 @@ export function AsciiFrame({
   label,
   static: isStatic = false,
 }: Props) {
+  const { mode } = useMode();
   const ref = useRef<HTMLDivElement | null>(null);
   const [drawn, setDrawn] = useState(isStatic);
 
   useEffect(() => {
-    if (isStatic) return;
+    if (isStatic || mode !== 'ascii') return;
     const el = ref.current;
     if (!el) return;
     const io = new IntersectionObserver(
@@ -59,7 +61,12 @@ export function AsciiFrame({
     );
     io.observe(el);
     return () => io.disconnect();
-  }, [isStatic]);
+  }, [isStatic, mode]);
+
+  // Classic mode: render children with no frame chrome at all.
+  if (mode !== 'ascii') {
+    return <>{children}</>;
+  }
 
   return (
     <div

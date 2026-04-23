@@ -14,6 +14,7 @@ import { Reveal } from '@/components/reveal';
 import { TiltCard } from '@/components/tilt-card';
 import { AsciiDivider } from '@/components/ascii-divider';
 import { AsciiFrame } from '@/components/ascii-frame';
+import { AsciiSignalMap } from '@/components/ascii-signal-map';
 
 const agentGridItems = [
   { code: '01', name: 'Signal Scanner', desc: 'Scans funding news, hires, press wires, competitor moves, PE activity. Scores 0–100.' },
@@ -155,6 +156,8 @@ export default function HomePage() {
       </Section>
 
       <AsciiDivider variant="flow" marginY={48} />
+
+      <AsciiSignalMap />
 
       <Section eyebrow="03 · Outcomes" style={{ background: 'var(--ink1)', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)' }}>
         <Reveal style={{ display: 'grid', gridTemplateColumns: '1fr 1.2fr', gap: 64, alignItems: 'end', marginBottom: 40 }}>

@@ -1,5 +1,7 @@
 'use client';
 
+import { useMode } from './mode-context';
+
 /**
  * AsciiDivider — a horizontal break between sections rendered in monospace.
  *
@@ -23,6 +25,9 @@ const TICK_PATTERN = '┈┈┄┈┈┄┈┈┄┈┈┄┈┈';
 const ROUTE_PATTERN = '─┄─┄─┬─┄─┄─┴─┄─┄─┬─┄─┄─';
 
 export function AsciiDivider({ variant = 'flow', label, marginY = 56 }: Props) {
+  const { mode } = useMode();
+  if (mode !== 'ascii') return null;
+
   const pattern =
     variant === 'flow' ? FLOW_PATTERN : variant === 'tick' ? TICK_PATTERN : ROUTE_PATTERN;
   const wide = pattern.repeat(40); // long enough to cover any viewport at any font size
