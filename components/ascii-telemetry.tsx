@@ -1,15 +1,12 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
-import { useMode } from './mode-context';
 
 /**
  * AsciiTelemetry — a compact, live "argus telemetry" readout that sits beside
  * the torus. Four rows: signal rate, network load, processing queue, trust
  * score. Each row carries a scrolling sparkline, a numeric value, and a tiny
  * trend glyph. Everything updates independently so something is always moving.
- *
- * Renders nothing in classic mode.
  */
 
 const SPARK = '▁▂▃▄▅▆▇█';
@@ -41,12 +38,10 @@ function trendGlyph(delta: number): string {
 }
 
 export function AsciiTelemetry() {
-  const { mode } = useMode();
   const preRef = useRef<HTMLPreElement | null>(null);
   const dotRef = useRef<HTMLSpanElement | null>(null);
 
   useEffect(() => {
-    if (mode !== 'ascii') return;
     const pre = preRef.current;
     const dot = dotRef.current;
     if (!pre) return;
@@ -116,9 +111,7 @@ export function AsciiTelemetry() {
 
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [mode]);
-
-  if (mode !== 'ascii') return null;
+  }, []);
 
   return (
     <div

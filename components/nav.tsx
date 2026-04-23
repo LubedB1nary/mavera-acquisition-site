@@ -4,7 +4,6 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { MavLogo } from './logo';
 import { ArrowRight } from './icons';
-import { ModeToggle } from './mode-toggle';
 
 const platformCols = [
   {
@@ -110,8 +109,7 @@ export function MavNav() {
           ))}
         </nav>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-          <ModeToggle />
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <a href="#" className="mav-btn mav-btn--ghost mav-btn--sm">Sign in</a>
           <a href="#" className="mav-btn mav-btn--primary mav-btn--sm">Start free <ArrowRight size={12} /></a>
         </div>

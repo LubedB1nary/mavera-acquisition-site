@@ -1,8 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
 import { Check } from './icons';
-import { AsciiWaveform } from './ascii-waveform';
-import { useMode } from './mode-context';
 
 const AGENT_STEPS = [
   { agent: 'Signal Scanner', code: '01', title: 'Signal detected', narr: 'A funding announcement crosses our radar. Tagged, deduped, scored 0–100 by relevance.', artifact: 'signal' },
@@ -227,7 +225,6 @@ function Artifact({ kind }: { kind: string }) {
 }
 
 export function AgentDemo({ compact = false }: { compact?: boolean }) {
-  const { mode } = useMode();
   const [paused, setPaused] = useState(false);
   const [i, setI] = useState(0);
 
@@ -295,15 +292,6 @@ export function AgentDemo({ compact = false }: { compact?: boolean }) {
 
       <div key={step.artifact} style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
         <Artifact kind={step.artifact} />
-        {mode === 'ascii' && (
-          <AsciiWaveform
-            width={64}
-            height={7}
-            fontSize={11}
-            caption="signal · realtime trace"
-            pulseRate={1.6}
-          />
-        )}
         <div style={{
           border: '1px dashed var(--line)', borderRadius: 10, padding: '10px 14px',
           display: 'flex', alignItems: 'center', gap: 10,

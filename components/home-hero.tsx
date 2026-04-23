@@ -3,11 +3,6 @@ import Link from 'next/link';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { ArrowRight, ArrowUpRight } from './icons';
 import { CountUp } from './reveal';
-import { AsciiTorus } from './ascii-torus';
-import { AsciiRain } from './ascii-rain';
-import { AsciiTelemetry } from './ascii-telemetry';
-import { AsciiWaveform } from './ascii-waveform';
-import { useMode } from './mode-context';
 
 const HEADLINE_WORDS = ['Agents', 'that', 'walk'];
 const HEADLINE_EM = ['through'];
@@ -24,7 +19,6 @@ const ROTATING_PHRASES = [
 type Particle = { left: number; top: number; size: number; delay: number; dur: number; opacity: number };
 
 export function HomeHero() {
-  const { mode } = useMode();
   const heroRef = useRef<HTMLElement | null>(null);
   const glowRef = useRef<HTMLDivElement | null>(null);
   const [phraseIdx, setPhraseIdx] = useState(0);
@@ -61,9 +55,8 @@ export function HomeHero() {
     return () => clearTimeout(timer);
   }, [phraseIdx]);
 
-  // cursor-follow glow (classic mode)
+  // cursor-follow glow
   useEffect(() => {
-    if (mode !== 'classic') return;
     const el = heroRef.current;
     const glow = glowRef.current;
     if (!el || !glow) return;
@@ -93,9 +86,9 @@ export function HomeHero() {
       el.removeEventListener('mouseleave', leave);
       cancelAnimationFrame(raf);
     };
-  }, [mode]);
+  }, []);
 
-  // deterministic particle field (classic mode)
+  // deterministic particle field
   const particles: Particle[] = useMemo(() => {
     const seed = (n: number) => {
       const x = Math.sin(n * 9301 + 49297) * 233280;
@@ -111,76 +104,67 @@ export function HomeHero() {
     }));
   }, []);
 
-  const isAscii = mode === 'ascii';
-
   return (
     <section
       ref={heroRef}
       style={{ position: 'relative', padding: '120px 0 100px', overflow: 'hidden', isolation: 'isolate' }}
     >
-      {/* Decorative layers — classic */}
-      {!isAscii && (
-        <>
-          <div className="mav-aurora" aria-hidden>
-            <div className="mav-aurora__a" />
-            <div className="mav-aurora__b" />
-            <div className="mav-aurora__c" />
-          </div>
-          <div className="mav-grid-bg" aria-hidden />
-          <div ref={glowRef} className="mav-cursor-glow" aria-hidden style={{ opacity: 0, left: '50%', top: '40%' }} />
-          <div aria-hidden style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
-            {particles.map((p, i) => (
-              <span
-                key={i}
-                className="mav-particle"
-                style={{
-                  left: `${p.left}%`,
-                  top: `${p.top}%`,
-                  width: p.size,
-                  height: p.size,
-                  opacity: p.opacity,
-                  animationDelay: `${p.delay}s`,
-                  animationDuration: `${p.dur}s`,
-                }}
-              />
-            ))}
-          </div>
-          <svg
-            aria-hidden
-            viewBox="0 0 1200 600"
-            preserveAspectRatio="none"
-            style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none', opacity: 0.55 }}
-          >
-            <defs>
-              <linearGradient id="lg" x1="0" x2="1" y1="0" y2="0">
-                <stop offset="0%" stopColor="rgba(200,168,255,0)" />
-                <stop offset="50%" stopColor="rgba(200,168,255,0.55)" />
-                <stop offset="100%" stopColor="rgba(200,168,255,0)" />
-              </linearGradient>
-            </defs>
-            {[120, 220, 360, 480].map((y, idx) => (
-              <path
-                key={y}
-                d={`M -50 ${y} Q 300 ${y - 40 + idx * 8} 600 ${y} T 1250 ${y - 10}`}
-                stroke="url(#lg)"
-                strokeWidth="1"
-                fill="none"
-                strokeDasharray="220"
-                style={{ animation: `mav-line-trace 4.5s ease-out ${idx * 0.6}s both` }}
-              />
-            ))}
-          </svg>
-        </>
-      )}
+      <div className="mav-aurora" aria-hidden>
+        <div className="mav-aurora__a" />
+        <div className="mav-aurora__b" />
+        <div className="mav-aurora__c" />
+      </div>
 
-      {/* Decorative layers — ascii */}
-      {isAscii && (
-        <>
-          {/* very faint grid still helps with structure */}
-          <div className="mav-grid-bg" aria-hidden style={{ opacity: 0.35 }} />
-          <AsciiRain cols={120} rows={42} fontSize={12} />
-        </>
-      )}
+      <div className="mav-grid-bg" aria-hidden />
+
+      <div ref={glowRef} className="mav-cursor-glow" aria-hidden style={{ opacity: 0, left: '50%', top: '40%' }} />
+
+      <div aria-hidden style={{ position: 'absolute', inset: 0, pointerEvents: 'none' }}>
+        {particles.map((p, i) => (
+          <span
+            key={i}
+            className="mav-particle"
+            style={{
+              left: `${p.left}%`,
+              top: `${p.top}%`,
+              width: p.size,
+              height: p.size,
+              opacity: p.opacity,
+              animationDelay: `${p.delay}s`,
+              animationDuration: `${p.dur}s`,
+            }}
+          />
+        ))}
+      </div>
+
+      <svg
+        aria-hidden
+        viewBox="0 0 1200 600"
+        preserveAspectRatio="none"
+        style={{
+          position: 'absolute', inset: 0, width: '100%', height: '100%',
+          pointerEvents: 'none', opacity: 0.55,
+        }}
+      >
+        <defs>
+          <linearGradient id="lg" x1="0" x2="1" y1="0" y2="0">
+            <stop offset="0%" stopColor="rgba(200,168,255,0)" />
+            <stop offset="50%" stopColor="rgba(200,168,255,0.55)" />
+            <stop offset="100%" stopColor="rgba(200,168,255,0)" />
+          </linearGradient>
+        </defs>
+        {[120, 220, 360, 480].map((y, idx) => (
+          <path
+            key={y}
+            d={`M -50 ${y} Q 300 ${y - 40 + idx * 8} 600 ${y} T 1250 ${y - 10}`}
+            stroke="url(#lg)"
+            strokeWidth="1"
+            fill="none"
+            strokeDasharray="220"
+            style={{ animation: `mav-line-trace 4.5s ease-out ${idx * 0.6}s both` }}
+          />
+        ))}
+      </svg>
 
       <div className="mav-container" style={{ position: 'relative', zIndex: 2 }}>
         <div
@@ -210,109 +194,59 @@ export function HomeHero() {
           </span>
         </div>
 
-        <div
+        <h1 className="mav-h1" style={{ maxWidth: 1000, lineHeight: 0.98 }}>
+          {HEADLINE_WORDS.map((w, i) => (
+            <span key={i} className="mav-word" style={{ animationDelay: `${0.1 + i * 0.08}s`, marginRight: '0.28em' }}>
+              {w}
+            </span>
+          ))}
+          {HEADLINE_EM.map((w, i) => (
+            <em key={`em-${i}`} className="mav-word mav-gradient-text" style={{ animationDelay: `${0.1 + (HEADLINE_WORDS.length + i) * 0.08}s`, marginRight: '0.28em' }}>
+              {w}
+            </em>
+          ))}
+          {HEADLINE_TAIL.map((w, i) => (
+            <span key={`t-${i}`} className="mav-word" style={{ animationDelay: `${0.1 + (HEADLINE_WORDS.length + HEADLINE_EM.length + i) * 0.08}s`, marginRight: '0.28em' }}>
+              {w}
+            </span>
+          ))}
+        </h1>
+
+        <p
+          className="mav-lede"
           style={{
-            display: 'grid',
-            gridTemplateColumns: isAscii ? 'minmax(0, 1.05fr) minmax(440px, 540px)' : '1fr',
-            gap: 56,
-            alignItems: 'start',
+            maxWidth: 620, marginTop: 32, fontSize: 20,
+            opacity: 0,
+            animation: 'mav-rise-soft 1s cubic-bezier(.2,.7,.2,1) .85s forwards',
+            minHeight: '3.2em',
           }}
         >
-          {/* left column: copy (shared) */}
-          <div>
-            <h1 className="mav-h1" style={{ maxWidth: isAscii ? 560 : 1000, lineHeight: 0.98, fontSize: isAscii ? 76 : 88 }}>
-              {HEADLINE_WORDS.map((w, i) => (
-                <span key={i} className="mav-word" style={{ animationDelay: `${0.1 + i * 0.08}s`, marginRight: '0.28em' }}>
-                  {w}
-                </span>
-              ))}
-              {HEADLINE_EM.map((w, i) => (
-                <em key={`em-${i}`} className="mav-word mav-gradient-text" style={{ animationDelay: `${0.1 + (HEADLINE_WORDS.length + i) * 0.08}s`, marginRight: '0.28em' }}>
-                  {w}
-                </em>
-              ))}
-              {HEADLINE_TAIL.map((w, i) => (
-                <span key={`t-${i}`} className="mav-word" style={{ animationDelay: `${0.1 + (HEADLINE_WORDS.length + HEADLINE_EM.length + i) * 0.08}s`, marginRight: '0.28em' }}>
-                  {w}
-                </span>
-              ))}
-            </h1>
-
-            <p
-              className="mav-lede"
-              style={{
-                maxWidth: isAscii ? 540 : 620, marginTop: 32, fontSize: 20,
-                opacity: 0,
-                animation: 'mav-rise-soft 1s cubic-bezier(.2,.7,.2,1) .85s forwards',
-                minHeight: '3.2em',
-              }}
-            >
-              Autonomous agents that{' '}
-              <span style={{ color: 'var(--text)', borderBottom: '1px dashed var(--gold-dim)', paddingBottom: 2 }}>
-                {typed}
-                <span style={{ display: 'inline-block', width: 1, marginLeft: 2, color: 'var(--gold)', animation: 'mav-blink-cursor 1s step-end infinite' }}>
-                  |
-                </span>
-              </span>{' '}— with an evidence chain on every decision.
-            </p>
-
-            <div
-              style={{
-                display: 'flex', gap: 12, marginTop: 40, alignItems: 'center', flexWrap: 'wrap',
-                opacity: 0,
-                animation: 'mav-rise-soft 1s cubic-bezier(.2,.7,.2,1) 1.05s forwards',
-              }}
-            >
-              <a href="#" className="mav-btn mav-btn--primary mav-shimmer">Start free <ArrowRight /></a>
-              <a href="#" className="mav-btn mav-btn--ghost">Book a demo</a>
-              <Link href="/api-docs" style={{ marginLeft: 12, fontSize: 13.5, color: 'var(--dim)', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-                Or read the API docs <ArrowUpRight />
-              </Link>
-            </div>
-          </div>
-
-          {/* right column: ASCII torus + live telemetry */}
-          {isAscii && (
-            <div
-              style={{
-                opacity: 0,
-                animation: 'mav-rise-soft 1.1s cubic-bezier(.2,.7,.2,1) .35s forwards',
-                position: 'relative',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'flex-start',
-                alignItems: 'center',
-                paddingTop: 4,
-                gap: 8,
-              }}
-            >
-              <AsciiTorus cols={70} rows={26} scale={1.05} />
-              <AsciiTelemetry />
-            </div>
-          )}
-        </div>
-
-        {/* full-width pulse waveform — only in ascii mode, sits above the stats grid */}
-        {isAscii && (
-          <div
-            style={{
-              marginTop: 72,
-              opacity: 0,
-              animation: 'mav-rise-soft 1s cubic-bezier(.2,.7,.2,1) 1.1s forwards',
-            }}
-          >
-            <AsciiWaveform
-              width={148}
-              height={6}
-              fontSize={11}
-              caption="argus · system pulse · last 60s"
-            />
-          </div>
-        )}
+          Autonomous agents that{' '}
+          <span style={{ color: 'var(--text)', borderBottom: '1px dashed var(--gold-dim)', paddingBottom: 2 }}>
+            {typed}
+            <span style={{ display: 'inline-block', width: 1, marginLeft: 2, color: 'var(--gold)', animation: 'mav-blink-cursor 1s step-end infinite' }}>
+              |
+            </span>
+          </span>{' '}— with an evidence chain on every decision.
+        </p>
 
         <div
           style={{
-            marginTop: isAscii ? 40 : 96, display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 32,
+            display: 'flex', gap: 12, marginTop: 40, alignItems: 'center', flexWrap: 'wrap',
+            opacity: 0,
+            animation: 'mav-rise-soft 1s cubic-bezier(.2,.7,.2,1) 1.05s forwards',
+          }}
+        >
+          <a href="#" className="mav-btn mav-btn--primary mav-shimmer">Start free <ArrowRight /></a>
+          <a href="#" className="mav-btn mav-btn--ghost">Book a demo</a>
+          <Link href="/api-docs" style={{ marginLeft: 12, fontSize: 13.5, color: 'var(--dim)', cursor: 'pointer', display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+            Or read the API docs <ArrowUpRight />
+          </Link>
+        </div>
+
+        <div
+          style={{
+            marginTop: 96, display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 32,
             borderTop: '1px solid var(--line)', paddingTop: 32, position: 'relative',
             opacity: 0,
             animation: 'mav-rise-soft 1s cubic-bezier(.2,.7,.2,1) 1.25s forwards',

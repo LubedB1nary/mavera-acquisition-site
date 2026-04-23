@@ -71,22 +71,6 @@ export function MavFooter() {
             </div>
           ))}
         </div>
-        <div
-          className="mav-ascii-only"
-          aria-hidden
-          style={{
-            paddingTop: 32,
-            paddingBottom: 18,
-            textAlign: 'center',
-            fontFamily: 'var(--mono)',
-            fontSize: 11.5,
-            letterSpacing: '0.32em',
-            color: 'var(--muted)',
-            opacity: 0.7,
-          }}
-        >
-          ◈ · ─ · · ─ · ◌ ·  argus · maven · personas · evidence  · ◌ · ─ · · ─ · ◈
-        </div>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 24, borderTop: '1px solid var(--line)' }}>
           <span className="mav-caption">© 2026 Mavera, Inc. All rights reserved.</span>
           <span className="mav-caption" style={{ fontFamily: 'var(--mono)', letterSpacing: '0.04em' }}>Receipts, not vibes.</span>
