@@ -11,7 +11,7 @@ export default function ContentPage() {
         ['200+', 'Workflow templates'],
         ['50+', 'Calibrated personas'],
         ['12', 'Question types per focus group'],
-        ['96%', 'Parity with human panels'],
+        ['98%', 'Agreement with the Harvard OASIS human-subject study'],
       ]}
       sections={[
         {

@@ -1,6 +1,6 @@
-const logos = ['Coinbase', 'S&P Global', 'PitchBook', 'Spotify', 'Hasbro', 'H&R Block', 'Stripe', 'Snowflake', 'Atlassian'];
+const logos = ['Spurrier Group', 'Bregma', 'Massive Minds', 'BVK', 'Make Marks', 'CGN', 'Hera Property Registry'];
 
-export function PipelineRow({ label = 'In active enterprise pipeline' }: { label?: string }) {
+export function PipelineRow({ label = 'Trusted by' }: { label?: string }) {
   const reel = [...logos, ...logos];
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 18, alignItems: 'center', width: '100%' }}>

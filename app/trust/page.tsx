@@ -4,7 +4,7 @@ import { Section } from '@/components/section';
 import { ClosingCTA } from '@/components/closing-cta';
 import { CertBadges } from '@/components/cert-badges';
 import { PipelineRow } from '@/components/pipeline-row';
-import { ArrowRight } from '@/components/icons';
+import { ArrowRight, ArrowUpRight } from '@/components/icons';
 
 const certs = [
   { name: 'SOC 2 Type II',    desc: 'Annual audit by an independent firm. Report available under NDA.' },
@@ -47,8 +47,26 @@ export default function TrustPage() {
             Evidence <em>at every layer.</em>
           </h1>
           <p className="mav-lede" style={{ maxWidth: 620, marginTop: 26 }}>
-            Most AI startups at our stage don't hold the certifications we do. Nine paying enterprise customers. AWS infra. Auth0. Full trust portal.
+            Most AI startups at our stage don't hold the certifications we do. AWS infrastructure. Auth0 identity. A live, public trust portal anyone can read &mdash; no NDA required for the posture itself.
           </p>
+          <div style={{ display: 'flex', gap: 12, marginTop: 36, flexWrap: 'wrap', alignItems: 'center' }}>
+            <a
+              href="https://trust.mavera.io"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mav-btn mav-btn--primary mav-shimmer"
+            >
+              Open the trust portal <ArrowUpRight />
+            </a>
+            <span className="mav-code" style={{ fontSize: 11.5, color: 'var(--muted)', letterSpacing: '.06em', display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+              <span style={{
+                width: 6, height: 6, borderRadius: 999, background: '#7ce0a8',
+                boxShadow: '0 0 0 3px rgba(124,224,168,0.18)',
+                animation: 'mav-pulse 1.6s ease-in-out infinite',
+              }} />
+              LIVE · trust.mavera.io
+            </span>
+          </div>
           <div style={{ marginTop: 36 }}>
             <CertBadges />
           </div>
@@ -76,7 +94,7 @@ export default function TrustPage() {
             </div>
           ))}
         </div>
-        <a href="#" className="mav-btn mav-btn--ghost mav-btn--sm" style={{ marginTop: 28 }}>Open the trust portal <ArrowRight size={12} /></a>
+        <a href="https://trust.mavera.io" target="_blank" rel="noopener noreferrer" className="mav-btn mav-btn--ghost mav-btn--sm" style={{ marginTop: 28 }}>Open the trust portal <ArrowRight size={12} /></a>
       </Section>
 
       <Section eyebrow="Sub-processors">
@@ -97,7 +115,13 @@ export default function TrustPage() {
       </Section>
 
       <Section dense style={{ padding: '120px 0' }}>
-        <ClosingCTA />
+        <ClosingCTA
+          headline={<>Read the <em className="mav-gradient-text">posture.</em> Then test the platform.</>}
+          lede="Our trust portal is public. SOC 2 Type II, ISO 27001, ISO 42001, HIPAA-ready — all verifiable now."
+          primaryLabel="Open trust.mavera.io"
+          primaryHref="https://trust.mavera.io"
+          secondaryLabel="Talk to security"
+        />
       </Section>
       <MavFooter />
     </>

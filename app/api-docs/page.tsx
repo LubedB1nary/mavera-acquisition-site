@@ -6,15 +6,17 @@ import { CodeCard } from '@/components/code-card';
 import { Check, ArrowRight } from '@/components/icons';
 
 const endpoints: [string, string, string][] = [
-  ['/v1/responses',        'Persona-enhanced response (OpenAI-compatible)',  '1–3'],
-  ['/v1/research',         '5-phase research · cited · confidence-scored',   '8–14'],
-  ['/v1/focus',            'Synthetic focus group · 12 question types',      '4–40'],
-  ['/v1/content/test',     'Pre-test content against a panel',               '3–12'],
-  ['/v1/meetings',         'Transcribe + extract · structured output',       '6'],
-  ['/v1/voice',            'Brand voice extraction + generation',            '2–5'],
+  ['/v1/responses',        'Persona-enhanced response (OpenAI-compatible)',  '1–5'],
+  ['/v1/research',         '5-phase Mave research · cited · confidence-scored', '10–50'],
+  ['/v1/focus',            'Synthetic focus group · 12 question types',      '50–200'],
+  ['/v1/content/generate', 'Generate content variants against a panel',      '10–30'],
+  ['/v1/meetings',         'Transcribe + extract · structured output',       '6–20'],
+  ['/v1/voice',            'Brand voice creation (one-time, then reuse)',    '50'],
+  ['/v1/personas/custom',  'Train a custom persona on your data',            '300'],
   ['/v1/signals',          'Live signal scan over 295K+ sources',            '0.1/hr'],
   ['/v1/agents/sales',     'Run the Argus pipeline on a signal',             '18–30'],
   ['/v1/synthetic',        'Generate synthetic data · all modalities',       '3–8'],
+  ['/v1/video',            'Video analysis · attention · clarity · CTA',     '100–500/min'],
   ['/v1/outcomes',         'Spawn an outcome · schedule · wake-up',          '3/wake'],
   ['/v1/crm',              'Query the owned-CRM surface',                    '1'],
 ];
@@ -37,16 +39,16 @@ export default function ApiPage() {
                 {[
                   '200+ workflow templates · ready-to-run',
                   'Credit-based pricing · every response shows cost',
-                  'Built for non-developers using Claude Code, Cursor, Codex',
+                  '50+ integration guides — Salesforce, HubSpot, Klaviyo, Google Ads, LinkedIn, Stripe, Amplitude, GA4 (full code included)',
                   'model: mavera-1 · 11 feature areas exposed',
                 ].map(t => (
                   <li key={t} style={{ fontSize: 14, color: 'var(--dim)', display: 'flex', gap: 10 }}><Check size={14} />{t}</li>
                 ))}
               </ul>
               <div style={{ display: 'flex', gap: 12, marginTop: 36, flexWrap: 'wrap' }}>
-                <a href="#" className="mav-btn mav-btn--primary">Get API key · free <ArrowRight /></a>
+                <a href="https://calendly.com/jill-mavera/discovery-call" target="_blank" rel="noopener noreferrer" className="mav-btn mav-btn--primary">Get an API key <ArrowRight /></a>
                 <a href="/pricing#api" className="mav-btn mav-btn--ghost">See API pricing</a>
-                <a href="#" className="mav-btn mav-btn--ghost">docs.mavera.io</a>
+                <a href="https://docs.mavera.io" target="_blank" rel="noopener noreferrer" className="mav-btn mav-btn--ghost">docs.mavera.io</a>
               </div>
             </div>
             <CodeCard />
@@ -100,13 +102,14 @@ export default function ApiPage() {
         </div>
       </Section>
 
-      <Section eyebrow="Templates · non-developer path" style={{ background: 'var(--ink1)', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)' }}>
+      <Section eyebrow="Workflow templates" style={{ background: 'var(--ink1)', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 64, alignItems: 'center' }}>
           <div>
             <h2 className="mav-h2">200+ <em>templates.</em> Call them by name.</h2>
             <p className="mav-lede" style={{ marginTop: 20 }}>
-              Don't want to build a pipeline? Invoke a template. Templates are composed workflows — they call multiple endpoints,
-              handle state, and return a single structured output.
+              Don't want to build a pipeline? Invoke a template. Templates are composed workflows &mdash; they call multiple endpoints,
+              handle state, and return a single structured output. Full library at{' '}
+              <a href="https://docs.mavera.io/guides/practical-workflow-ideas" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--gold)', borderBottom: '1px solid var(--gold-dim)' }}>docs.mavera.io/guides/practical-workflow-ideas</a>.
             </p>
             <ul style={{ listStyle: 'none', padding: 0, margin: '28px 0 0', display: 'flex', flexDirection: 'column', gap: 10 }}>
               {[
@@ -133,7 +136,13 @@ export default function ApiPage() {
       </Section>
 
       <Section dense style={{ padding: '120px 0' }}>
-        <ClosingCTA />
+        <ClosingCTA
+          headline={<>One line of code. <em className="mav-gradient-text">Persona-aware</em> intelligence.</>}
+          lede="Drop in mavera-1 wherever you call OpenAI today. Add a persona_id and the model becomes a calibrated respondent."
+          primaryLabel="Get an API key"
+          secondaryLabel="Read the docs"
+          secondaryHref="https://docs.mavera.io"
+        />
       </Section>
       <MavFooter />
     </>

@@ -11,7 +11,7 @@ export default function MavenPage() {
         ['12', 'Tools in Maven\'s hand'],
         ['7', 'Specialist agents she composes'],
         ['∞', 'Outcomes running in parallel'],
-        ['0', 'Prompt engineering required'],
+        ['No', 'Prompt engineering required'],
       ]}
       tools={[
         { id: 'websearch', name: 'Web search', cat: 'Research', desc: 'Live web + news + academic corpus.' },

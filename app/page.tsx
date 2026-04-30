@@ -46,18 +46,12 @@ const evidencePoints: [string, string][] = [
 ];
 
 const platformCaps: [string, string][] = [
-  ['Responses API', 'Persona-enhanced AI. Drop-in OpenAI replacement.'],
-  ['Maven', 'Deep research with source attribution.'],
-  ['Personas', '50+ built-in. Custom-trained on your data.'],
-  ['Focus Groups', '12 question types · synthesis engine.'],
-  ['Video Analysis', 'Attention · clarity · emotion · CTA.'],
-  ['News Intelligence', '295K+ sources, persona-calibrated.'],
-  ['Brand Voice', 'Extracted from your existing content.'],
-  ['Content Generation', 'Template-based, audience-tested.'],
+  ['Maven', 'The generalist agent. Composes specialists, runs Outcomes, asks when stuck.'],
+  ['Autonomous Sales', 'The 7-agent Argus module. Signal → outreach → qualified meeting.'],
+  ['Synthetic Intelligence', '50+ personas + 12-question focus groups. 98% OASIS agreement.'],
+  ['Evidence Layer', 'Source attribution, confidence scores, full audit trails — every decision.'],
   ['Meetings', 'Recording · transcript · structured extraction.'],
-  ['Autonomous Sales', 'The 7-agent Argus module.'],
-  ['CRM', 'Full pipeline. IMAP/SMTP. No third-party.'],
-  ['Synthetic Data', 'FDA-accepted · differential privacy.'],
+  ['OpenAI-Compatible API', 'Drop-in replacement. Add a persona_id and ship.'],
 ];
 
 const trustRows: [string, string][] = [
@@ -97,6 +91,9 @@ export default function HomePage() {
             </p>
             <p className="mav-body" style={{ marginTop: 16, color: 'var(--muted)' }}>
               The human closes the deal. Everything before that is handled.
+            </p>
+            <p className="mav-body" style={{ marginTop: 14, color: 'var(--dim)', fontSize: 13.5 }}>
+              Argus is one of nine. <Link href="/agents" style={{ color: 'var(--gold)', borderBottom: '1px solid var(--gold-dim)' }}>Maven</Link> orchestrates research, content, meetings, market intel, focus groups, ops, and science &mdash; all on the same evidence layer.
             </p>
             <Link href="/agents/sales" className="mav-btn mav-btn--ghost mav-btn--sm mav-shimmer" style={{ marginTop: 20 }}>
               See the flywheel <ArrowRight size={12} />
@@ -155,8 +152,10 @@ export default function HomePage() {
           </div>
           <div style={{ paddingTop: 8 }}>
             <p className="mav-lede" style={{ maxWidth: 560 }}>
-              An Outcome is a long-running project with its own strategy session, schedule, child sessions, and journal. Maven
-              wakes up on cadence, makes progress, asks when she needs help, and reports back.
+              An Outcome is a goal you hand Maven. She plans the work, runs it on a schedule, spawns child sessions, asks when stuck, and reports back &mdash; for weeks or months, autonomously.
+            </p>
+            <p className="mav-body" style={{ marginTop: 12, color: 'var(--muted)', maxWidth: 560 }}>
+              Maven runs on your schedule &mdash; daily, hourly, or weekly. No app needs to be open. Notifications via macOS and iMessage.
             </p>
             <Link href="/outcomes" className="mav-btn mav-btn--ghost mav-btn--sm mav-shimmer" style={{ marginTop: 20 }}>
               See outcomes <ArrowRight size={12} />
@@ -176,17 +175,17 @@ export default function HomePage() {
         </div>
         <Reveal style={{ display: 'grid', gridTemplateColumns: '1fr 1.15fr', gap: 80, alignItems: 'center' }}>
           <div>
-            <h2 className="mav-h2">Ask your audience <em className="mav-gradient-text">before</em> you spend.</h2>
+            <h2 className="mav-h2">A human intelligence layer that <em className="mav-gradient-text">predicts</em> how real people think, feel, and react.</h2>
             <p className="mav-lede" style={{ marginTop: 24 }}>
-              Fifty-plus AI personas, statistically validated at 98% accuracy against real human panels.
-              Test any message, any creative, any strategy against your actual audience — in minutes, not weeks.
+              Fifty-plus calibrated AI personas, validated at 98% agreement with the Harvard OASIS human-subject study.
+              Test any message, any creative, any strategy against your actual audience &mdash; in minutes, not weeks.
             </p>
             <ul style={{ listStyle: 'none', padding: 0, margin: '32px 0 0', display: 'flex', flexDirection: 'column', gap: 12 }}>
               {[
                 'Focus groups with 12 question types · synthesis in minutes',
                 'Content testing with structured engagement scores',
                 'Video analysis — attention, clarity, emotion, CTA',
-                '96% parity with traditional panels · 52+ published studies',
+                '50+ built-in personas · custom personas trained on your data',
               ].map(line => (
                 <li key={line} style={{ display: 'flex', gap: 10, fontSize: 14.5, color: 'var(--dim)' }}>
                   <Check size={14} /><span>{line}</span>
@@ -200,7 +199,7 @@ export default function HomePage() {
               <span className="mav-chip"><span className="mav-chip-dot mav-chip-dot--live" />12 / 12 personas responding</span>
             </div>
             <div style={{ fontSize: 15, fontFamily: 'var(--serif)', fontStyle: 'italic', color: 'var(--text)', padding: '16px 0', borderBottom: '1px solid var(--line)', marginBottom: 16 }}>
-              "How does this headline land with you?" — <span style={{ color: 'var(--dim)', fontStyle: 'normal', fontFamily: 'var(--sans)', fontSize: 13 }}>Open the door to growth.</span>
+              "How does this headline land with you?" — <span style={{ color: 'var(--dim)', fontStyle: 'normal', fontFamily: 'var(--sans)', fontSize: 13 }}>Defensible growth, on demand.</span>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
               {personas.map(p => (
@@ -268,21 +267,21 @@ export default function HomePage() {
               all powered by the same synthetic layer, all exposed through one OpenAI-compatible API.
             </p>
           </Reveal>
-          <Reveal stagger style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 1, background: 'var(--line)', border: '1px solid var(--line)', borderRadius: 14, overflow: 'hidden' }}>
+          <Reveal stagger style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 1, background: 'var(--line)', border: '1px solid var(--line)', borderRadius: 14, overflow: 'hidden' }}>
             {platformCaps.map(([k, v], idx) => (
               <div
                 key={k}
                 className="mav-sheen mav-surface-lift"
                 style={{
-                  padding: 22, minHeight: 130,
+                  padding: 26, minHeight: 160,
                   display: 'flex', flexDirection: 'column', justifyContent: 'space-between',
                   cursor: 'default',
                 }}
               >
                 <span className="mav-code" style={{ color: 'var(--muted)', fontSize: 10.5, letterSpacing: '.1em' }}>{String(idx + 1).padStart(2, '0')}</span>
                 <div>
-                  <div style={{ fontSize: 15, fontWeight: 500, letterSpacing: '-0.01em', marginBottom: 4 }}>{k}</div>
-                  <div style={{ fontSize: 12.5, color: 'var(--dim)', lineHeight: 1.5 }}>{v}</div>
+                  <div style={{ fontSize: 16, fontWeight: 500, letterSpacing: '-0.01em', marginBottom: 6 }}>{k}</div>
+                  <div style={{ fontSize: 13, color: 'var(--dim)', lineHeight: 1.55 }}>{v}</div>
                 </div>
               </div>
             ))}
@@ -303,7 +302,7 @@ export default function HomePage() {
               {[
                 '200+ workflow templates · ready-to-run',
                 'Credit-based pricing · every response shows cost',
-                'Built for non-developers using Claude Code, Cursor, Codex',
+                '50+ integration guides — Salesforce, HubSpot, Klaviyo, Google Ads, LinkedIn, Stripe, and more (full code included)',
                 '11 feature areas exposed · model: mavera-1',
               ].map(t => (
                 <li key={t} style={{ fontSize: 14, color: 'var(--dim)', display: 'flex', gap: 10 }}><Check size={14} />{t}</li>
@@ -311,7 +310,7 @@ export default function HomePage() {
             </ul>
             <div style={{ marginTop: 36, display: 'flex', gap: 12 }}>
               <Link href="/api-docs" className="mav-btn mav-btn--primary">API overview <ArrowRight /></Link>
-              <a href="#" className="mav-btn mav-btn--ghost">docs.mavera.io <ArrowUpRight /></a>
+              <a href="https://docs.mavera.io" target="_blank" rel="noopener noreferrer" className="mav-btn mav-btn--ghost">docs.mavera.io <ArrowUpRight /></a>
             </div>
           </div>
           <CodeCard />
@@ -324,8 +323,7 @@ export default function HomePage() {
             <h2 className="mav-h2">Built for <em className="mav-gradient-text">enterprise</em> from day one.</h2>
             <p className="mav-lede" style={{ marginTop: 24 }}>
               Most AI startups at our stage don't hold the certifications we do.
-              Nine paying enterprise customers. Pipeline with household names.
-              AWS infrastructure. Auth0. Full trust portal.
+              SOC 2 Type II. ISO 27001. ISO 42001. HIPAA-ready. AWS infrastructure. Auth0. Live trust portal anyone can read.
             </p>
             <div style={{ marginTop: 28 }}>
               <CertBadges />
@@ -341,7 +339,7 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
-            <a href="#" className="mav-btn mav-btn--ghost mav-btn--sm" style={{ marginTop: 20 }}>Open trust portal <ArrowUpRight /></a>
+            <a href="https://trust.mavera.io" target="_blank" rel="noopener noreferrer" className="mav-btn mav-btn--ghost mav-btn--sm" style={{ marginTop: 20 }}>Open trust portal <ArrowUpRight /></a>
           </div>
         </Reveal>
       </Section>

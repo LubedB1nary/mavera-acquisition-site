@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { MavNav } from '@/components/nav';
 import { MavFooter } from '@/components/footer';
 import { Section } from '@/components/section';
@@ -81,8 +82,8 @@ export default function SalesAgentsPage() {
                 outreach, reply handling, qualification, re-engagement, meeting prep. You close.
               </p>
               <div style={{ display: 'flex', gap: 12, marginTop: 36 }}>
-                <a href="#" className="mav-btn mav-btn--primary">Book a walkthrough <ArrowRight /></a>
-                <a href="#" className="mav-btn mav-btn--ghost">See the API</a>
+                <a href="https://calendly.com/jill-mavera/discovery-call" target="_blank" rel="noopener noreferrer" className="mav-btn mav-btn--primary">Book a walkthrough <ArrowRight /></a>
+                <Link href="/api-docs" className="mav-btn mav-btn--ghost">See the API</Link>
               </div>
             </div>
             {/* Argus orbit: 3D ASCII torus with three orbiting satellites + live telemetry readout */}
@@ -136,7 +137,13 @@ export default function SalesAgentsPage() {
       </Section>
 
       <Section dense style={{ padding: '120px 0' }}>
-        <ClosingCTA />
+        <ClosingCTA
+          headline={<>Seven agents. One <em className="mav-gradient-text">qualified meeting</em> at a time.</>}
+          lede="Argus runs the cycle so the human shows up to the close. Walk through it with us against your own pipeline."
+          primaryLabel="Book a walkthrough"
+          secondaryLabel="See the API"
+          secondaryHref="/api-docs"
+        />
       </Section>
       <MavFooter />
     </>

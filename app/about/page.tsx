@@ -5,8 +5,8 @@ import { ClosingCTA } from '@/components/closing-cta';
 import { PipelineRow } from '@/components/pipeline-row';
 
 const team: [string, string, string][] = [
-  ['Soren Ames', 'Founder · CEO', 'Built the first Maven as an internal tool for Ospri. Ten years in diagnostics and go-to-market. Believes receipts beat vibes.'],
-  ['Iris Kwon',  'Founder · Chief Scientist', 'Previously led synthetic data R&D at a national lab. Forty papers, zero patience for unsourced claims.'],
+  ['Jill Axline', 'CEO · Strategy / Go-to-Market', 'Ex-Morningstar marketing leader. PhD in Communication. Architecting Mavera\'s commercial motion and the evidence-led narrative customers and regulators can defend.'],
+  ['Alex Hassan', 'CTO · AI / Agentic Systems',    'Full-stack engineer and applied AI builder with a background in biotech. Owns the agent runtime, the evidence layer, and the synthetic stack end-to-end.'],
 ];
 
 const principles: [string, string][] = [
@@ -16,10 +16,10 @@ const principles: [string, string][] = [
 ];
 
 const facts: [string, string][] = [
-  ['Founded', '2024 · San Francisco'],
-  ['Team',    '17 full-time · engineers, scientists, designers'],
-  ['Funding', 'Seed · led by a16z'],
-  ['Customers', '9 paying enterprises · 6 in active pipeline'],
+  ['Founded',    '2024 · Delaware C-Corp · DBA in Illinois'],
+  ['Team',       'Lean core team · scalable contracted engineering capacity'],
+  ['Customers',  'Spurrier Group · Bregma · BVK · Massive Minds · CGN · Make Marks · Hera Property Registry'],
+  ['Compliance', 'SOC 2 Type II · ISO 27001 · ISO 42001 · HIPAA-ready'],
 ];
 
 export default function AboutPage() {
@@ -70,13 +70,12 @@ export default function AboutPage() {
         </div>
       </Section>
 
-      <Section eyebrow="Research">
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 24 }}>
+      <Section eyebrow="What we measure">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24 }}>
           {[
-            ['52+', 'Published parity studies'],
-            ['98%', 'OASIS benchmark accuracy'],
-            ['9', 'Papers submitted in 2026'],
-            ['4', 'Open benchmarks we maintain'],
+            ['98%', 'Synthetic-audience agreement vs. the Harvard OASIS human-subject study'],
+            ['4M+', 'Behavioral interactions in the synthetic layer'],
+            ['295K+', 'Media sources under continuous monitoring'],
           ].map(([k, v]) => (
             <div key={k} style={{ borderLeft: '1.5px solid var(--gold)', paddingLeft: 16 }}>
               <div style={{ fontSize: 44, letterSpacing: '-0.03em', fontWeight: 500, fontFamily: 'var(--serif)', fontStyle: 'italic', color: 'var(--gold)' }}>{k}</div>
@@ -102,7 +101,13 @@ export default function AboutPage() {
       </Section>
 
       <Section dense style={{ padding: '120px 0' }}>
-        <ClosingCTA />
+        <ClosingCTA
+          headline={<>Talk to the <em className="mav-gradient-text">team.</em></>}
+          lede="Bring a use case. We'll show you the platform, the trust posture, and the receipts behind every claim on this site."
+          primaryLabel="Talk to the team"
+          secondaryLabel="See the platform"
+          secondaryHref="/features"
+        />
       </Section>
       <MavFooter />
     </>

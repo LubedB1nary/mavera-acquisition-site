@@ -64,7 +64,13 @@ export default function AgentsIndexPage() {
       </Section>
 
       <Section dense style={{ padding: '120px 0' }}>
-        <ClosingCTA />
+        <ClosingCTA
+          headline={<>Hand Maven a goal. <em className="mav-gradient-text">Watch the specialists</em> compose.</>}
+          lede="Tell us the outcome you want. Maven plans the work, picks the agents, and reports back on her own cadence."
+          primaryLabel="Start an outcome"
+          secondaryLabel="Browse all nine"
+          secondaryHref="/agents"
+        />
       </Section>
       <MavFooter />
     </>

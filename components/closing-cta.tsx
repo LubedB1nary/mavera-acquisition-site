@@ -1,7 +1,24 @@
 'use client';
+import { ReactNode } from 'react';
 import { ArrowRight } from './icons';
 
-export function ClosingCTA() {
+interface ClosingCTAProps {
+  headline?: ReactNode;
+  lede?: string;
+  primaryLabel?: string;
+  primaryHref?: string;
+  secondaryLabel?: string;
+  secondaryHref?: string;
+}
+
+export function ClosingCTA({
+  headline = (<>The door to <em className="mav-gradient-text">growth</em> is open.</>),
+  lede = 'Start free. Deploy your first agent today. Close the deal yourself.',
+  primaryLabel = 'Start free',
+  primaryHref = 'https://calendly.com/jill-mavera/discovery-call',
+  secondaryLabel = 'Book a walkthrough',
+  secondaryHref = 'https://calendly.com/jill-mavera/discovery-call',
+}: ClosingCTAProps = {}) {
   return (
     <div
       className="mav-glow"
@@ -41,15 +58,15 @@ export function ClosingCTA() {
             style={{ animation: 'mav-pulse 2.4s ease-in-out infinite' }} />
         </svg>
 
-        <h2 className="mav-h2" style={{ fontSize: 56, maxWidth: 800, margin: '0 auto' }}>
-          The door to <em className="mav-gradient-text">growth</em> is open.
+        <h2 className="mav-h2" style={{ fontSize: 56, maxWidth: 880, margin: '0 auto' }}>
+          {headline}
         </h2>
-        <p className="mav-lede" style={{ maxWidth: 520, margin: '20px auto 0' }}>
-          Start free. Deploy your first agent today. Close the deal yourself.
+        <p className="mav-lede" style={{ maxWidth: 560, margin: '20px auto 0' }}>
+          {lede}
         </p>
         <div style={{ display: 'flex', gap: 12, marginTop: 36, justifyContent: 'center', flexWrap: 'wrap' }}>
-          <a href="#" className="mav-btn mav-btn--primary mav-shimmer">Start free <ArrowRight /></a>
-          <a href="#" className="mav-btn mav-btn--ghost">Book a demo</a>
+          <a href={primaryHref} target={primaryHref?.startsWith('http') ? '_blank' : undefined} rel={primaryHref?.startsWith('http') ? 'noopener noreferrer' : undefined} className="mav-btn mav-btn--primary mav-shimmer">{primaryLabel} <ArrowRight /></a>
+          <a href={secondaryHref} target={secondaryHref?.startsWith('http') ? '_blank' : undefined} rel={secondaryHref?.startsWith('http') ? 'noopener noreferrer' : undefined} className="mav-btn mav-btn--ghost">{secondaryLabel}</a>
         </div>
       </div>
     </div>

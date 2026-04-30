@@ -14,9 +14,17 @@ interface AgentSubPageProps {
   tools?: { id: string; name: string; cat: string; desc: string }[];
   scripts?: { title: string; steps: string[] }[];
   sections?: { title: string; body: ReactNode }[];
+  cta?: {
+    headline?: ReactNode;
+    lede?: string;
+    primaryLabel?: string;
+    primaryHref?: string;
+    secondaryLabel?: string;
+    secondaryHref?: string;
+  };
 }
 
-export function AgentSubPage({ eyebrow, name, tagline, lede, metrics, tools, scripts, sections = [] }: AgentSubPageProps) {
+export function AgentSubPage({ eyebrow, name, tagline, lede, metrics, tools, scripts, sections = [], cta }: AgentSubPageProps) {
   return (
     <>
       <MavNav />
@@ -54,7 +62,14 @@ export function AgentSubPage({ eyebrow, name, tagline, lede, metrics, tools, scr
       ))}
 
       <Section dense style={{ padding: '120px 0' }}>
-        <ClosingCTA />
+        <ClosingCTA
+          headline={cta?.headline ?? (<>See <em className="mav-gradient-text">{name}</em> against your own data.</>)}
+          lede={cta?.lede ?? `Bring a real workflow. We'll wire ${name} into it and walk you through the evidence chain.`}
+          primaryLabel={cta?.primaryLabel ?? 'Book a walkthrough'}
+          primaryHref={cta?.primaryHref}
+          secondaryLabel={cta?.secondaryLabel ?? 'See the API'}
+          secondaryHref={cta?.secondaryHref ?? '/api-docs'}
+        />
       </Section>
       <MavFooter />
     </>

@@ -7,7 +7,7 @@ import { ArrowRight, Check } from '@/components/icons';
 
 const features = [
   { code: '01', name: 'Autonomous agents', lead: 'The 7-agent Argus module.', bullets: ['Signal Scanner · relevance scoring', 'Prospect Researcher · dossiers', 'Outreach Drafter · brand voice', 'Conversation Handler · sentiment + stage', 'Qualifier · ICP fit with contributing factors', 'Re-engager · stalled deal recovery', 'Meeting Prepper · 30-min pre-call brief'] },
-  { code: '02', name: 'Synthetic intelligence', lead: '50+ AI personas validated at 98% against human panels.', bullets: ['Focus groups · 12 question types', 'Content testing · structured scores', 'Video analysis · attention · clarity · emotion · CTA', '52+ published parity studies'] },
+  { code: '02', name: 'Synthetic intelligence', lead: '50+ AI personas validated at 98% agreement with the Harvard OASIS human-subject study.', bullets: ['Focus groups · 12 question types', 'Content testing · structured scores', 'Video analysis · attention · clarity · emotion · CTA', 'Custom personas trained on your data'] },
   { code: '03', name: 'Evidence layer', lead: 'Every decision shows its work — or we call it a draft.', bullets: ['Source attribution on every claim', 'Confidence scoring per claim', 'Full audit trails · replayable', 'Explainable lead scores'] },
   { code: '04', name: 'Maven · research', lead: 'Deep 5-phase research with source attribution.', bullets: ['Scope · Search · Synthesize · Attribute · Audit', '295K+ source corpus · news + policy + academic', 'Conflicts surfaced, not averaged', 'Hallucination risk scored'] },
   { code: '05', name: 'Meetings', lead: 'Recording to structured output.', bullets: ['On-device option available', 'Action items · decisions · blockers', 'Sentiment arc · direct quotes', 'Agenda coverage + next meeting auto-draft'] },
@@ -66,7 +66,13 @@ export default function FeaturesPage() {
       </Section>
 
       <Section dense style={{ padding: '120px 0' }}>
-        <ClosingCTA />
+        <ClosingCTA
+          headline={<>One platform. One <em className="mav-gradient-text">evidence layer.</em></>}
+          lede="Pick a surface, run a pilot, swap out a vendor. The full platform exposes the same API, the same provenance, the same trust posture."
+          primaryLabel="Book a walkthrough"
+          secondaryLabel="See the API"
+          secondaryHref="/api-docs"
+        />
       </Section>
       <MavFooter />
     </>

@@ -22,14 +22,6 @@ const scientific: [string, string][] = [
   ['Domain assays', 'Physics-constrained generation with variance matching for scientific use cases.'],
 ];
 
-const publications: [string, string, string][] = [
-  ['2026', 'Differentially private synthetic assay generation with physics priors', 'Nature Machine Intelligence'],
-  ['2026', 'OASIS: a benchmark for synthetic audience validation', 'NeurIPS Datasets & Benchmarks'],
-  ['2025', 'Molecular design via LLM-steered latent optimization', 'JCIM'],
-  ['2025', 'Provenance as a first-class citizen in synthetic data pipelines', 'MLSys'],
-  ['2024', 'Fidelity vs privacy tradeoffs in tabular synthesis at scale', 'KDD'],
-];
-
 export default function SyntheticPage() {
   return (
     <>
@@ -46,8 +38,8 @@ export default function SyntheticPage() {
             evaluated on nine metrics per run, shipped with a provenance graph you can defend.
           </p>
           <div style={{ display: 'flex', gap: 12, marginTop: 36 }}>
-            <a href="#" className="mav-btn mav-btn--primary">Request pilot dataset <ArrowRight /></a>
-            <a href="#" className="mav-btn mav-btn--ghost">Read the methods paper</a>
+            <a href="https://calendly.com/jill-mavera/discovery-call" target="_blank" rel="noopener noreferrer" className="mav-btn mav-btn--primary">Request pilot dataset <ArrowRight /></a>
+            <a href="https://docs.mavera.io" target="_blank" rel="noopener noreferrer" className="mav-btn mav-btn--ghost">See the platform docs</a>
           </div>
         </div>
       </section>
@@ -103,20 +95,14 @@ export default function SyntheticPage() {
         </div>
       </Section>
 
-      <Section eyebrow="Methods & publications" style={{ background: 'var(--ink1)', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)' }}>
-        <div className="mav-card" style={{ padding: 0, overflow: 'hidden' }}>
-          {publications.map(([year, title, venue]) => (
-            <div key={title} style={{ display: 'grid', gridTemplateColumns: '80px 1fr 260px', padding: '18px 24px', borderBottom: '1px solid var(--line-soft)', alignItems: 'center', gap: 24 }}>
-              <span className="mav-code" style={{ color: 'var(--muted)', fontSize: 13 }}>{year}</span>
-              <span style={{ fontSize: 14, color: 'var(--text)' }}>{title}</span>
-              <span style={{ fontFamily: 'var(--serif)', fontStyle: 'italic', fontSize: 14, color: 'var(--dim)' }}>{venue}</span>
-            </div>
-          ))}
-        </div>
-      </Section>
-
       <Section dense style={{ padding: '120px 0' }}>
-        <ClosingCTA />
+        <ClosingCTA
+          headline={<>Synthetic intelligence, <em className="mav-gradient-text">defensibly</em> built.</>}
+          lede="Bring a question. We'll spin up a calibrated panel, run a focus group against it, and walk you through the evidence."
+          primaryLabel="Run a pilot focus group"
+          secondaryLabel="See the methods"
+          secondaryHref="/agents/science"
+        />
       </Section>
       <MavFooter />
     </>

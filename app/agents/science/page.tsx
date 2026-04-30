@@ -36,27 +36,17 @@ const evalMetrics: [string, string, string][] = [
   ['Replicability',   '0.96',  'pass'],
 ];
 
-const publications: [string, string, string][] = [
-  ['2026', 'Differentially private synthetic assay generation with physics priors',      'Nature Machine Intelligence'],
-  ['2026', 'OASIS: a benchmark for synthetic audience validation at population scale',    'NeurIPS Datasets & Benchmarks'],
-  ['2025', 'Molecular design via LLM-steered latent optimization',                        'JCIM'],
-  ['2025', 'Provenance as a first-class citizen in synthetic data pipelines',             'MLSys'],
-  ['2025', 'Audit trails for autonomous agents: a privacy-preserving framework',          'IEEE S&P'],
-  ['2024', 'Fidelity vs privacy tradeoffs in tabular synthesis at scale',                 'KDD'],
-  ['2024', 'Counterfactual panel generation for consumer behavior modeling',              'KDD'],
-];
-
 const faqs: [string, string][] = [
   ['"Synthetic data just amplifies bias."',
-    'Not if you measure it. The eval harness runs 8-subgroup bias tests on every generator; we publish the deltas and warn when they drift. The alternative — real data — almost always has worse subgroup coverage than disciplined synthetic.'],
+    'Not if you measure it. The eval harness runs 8-subgroup bias tests on every generator and we surface the deltas. The alternative — real data — almost always has worse subgroup coverage than disciplined synthetic.'],
   ['"How do you prevent test-data leakage?"',
     'Hold-out sets are hashed before ingestion; every downstream eval logs against the hash. We run a membership-inference attack as part of the harness — if it passes, we flag.'],
   ['"Can we run on-prem?"',
-    'Yes. The generator + eval stack ships as a single binary. We support air-gapped deployments with offline license activation.'],
+    'Air-gapped deployment is on the roadmap for Enterprise. Today, deployments run in our SOC 2 / ISO 27001 environment with workspace-scoped keys.'],
   ['"What about regulated environments?"',
-    'HIPAA-ready, 21 CFR Part 11 alignment, ISO 42001 certified AI management. BAA on request.'],
+    'HIPAA-ready with BAA on request. Our compliance posture (SOC 2 Type II, ISO 27001, ISO 42001) is published live at trust.mavera.io.'],
   ['"Is this real ML or just an LLM prompt?"',
-    'Real ML. GAN + LLM hybrid depending on modality. Training runs are checkpointed, W&B-tracked, and cost-attributed per epoch.'],
+    'Real ML. Modality-dependent generators with measured fidelity, leakage, and bias. Training runs are checkpointed and cost-attributed.'],
   ['"Who owns the synthetic data?"',
     'You do. Generator weights can stay on your infra. We retain only the audit metadata necessary to defend provenance — a signed hash, nothing else.'],
 ];
@@ -142,8 +132,8 @@ export default function SciencePage() {
                 evaluation harnesses that check leakage and bias on every checkpoint.
               </p>
               <div style={{ display: 'flex', gap: 12, marginTop: 36 }}>
-                <a href="#" className="mav-btn mav-btn--primary">Schedule a science session <ArrowRight /></a>
-                <a href="#" className="mav-btn mav-btn--ghost">Read the provenance spec</a>
+                <a href="https://calendly.com/jill-mavera/discovery-call" target="_blank" rel="noopener noreferrer" className="mav-btn mav-btn--primary">Schedule a science session <ArrowRight /></a>
+                <a href="https://docs.mavera.io" target="_blank" rel="noopener noreferrer" className="mav-btn mav-btn--ghost">See the platform docs</a>
               </div>
             </div>
             <HeroViz />
@@ -257,19 +247,7 @@ export default function SciencePage() {
         </div>
       </Section>
 
-      <Section eyebrow="Publications" style={{ background: 'var(--ink1)', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)' }}>
-        <div className="mav-card" style={{ padding: 0, overflow: 'hidden' }}>
-          {publications.map(([year, title, venue]) => (
-            <div key={title} style={{ display: 'grid', gridTemplateColumns: '80px 1fr 260px', padding: '18px 24px', borderBottom: '1px solid var(--line-soft)', alignItems: 'center', gap: 24 }}>
-              <span className="mav-code" style={{ color: 'var(--muted)', fontSize: 13 }}>{year}</span>
-              <span style={{ fontSize: 14, color: 'var(--text)' }}>{title}</span>
-              <span style={{ fontFamily: 'var(--serif)', fontStyle: 'italic', fontSize: 14, color: 'var(--dim)' }}>{venue}</span>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      <Section eyebrow="FAQ">
+      <Section eyebrow="FAQ" style={{ background: 'var(--ink1)', borderTop: '1px solid var(--line)', borderBottom: '1px solid var(--line)' }}>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
           {faqs.map(([q, a]) => (
             <div key={q} className="mav-card" style={{ padding: 24 }}>
@@ -301,7 +279,13 @@ export default function SciencePage() {
       </Section>
 
       <Section dense style={{ padding: '120px 0' }}>
-        <ClosingCTA />
+        <ClosingCTA
+          headline={<>Synthetic data with a <em className="mav-gradient-text">chain of custody.</em></>}
+          lede="Bring a dataset, a privacy budget, and a downstream task. We'll generate, evaluate, and ship a signed provenance graph you can hand to a regulator."
+          primaryLabel="Schedule a science session"
+          secondaryLabel="See the platform docs"
+          secondaryHref="https://docs.mavera.io"
+        />
       </Section>
       <MavFooter />
     </>

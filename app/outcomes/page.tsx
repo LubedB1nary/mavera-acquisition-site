@@ -101,8 +101,8 @@ export default function OutcomesPage() {
           <div>
             <h2 className="mav-h2">Maven wakes <em>without you.</em></h2>
             <p className="mav-lede" style={{ marginTop: 24 }}>
-              Install the LaunchAgent and Maven runs on cadence — daily at 9am, hourly for urgent outcomes, weekly for long-burners.
-              macOS native notifications. iMessage fan-out. No app needs to be open.
+              Maven runs on your schedule &mdash; daily, hourly, or weekly. No app needs to be open.
+              macOS native notifications. iMessage fan-out. You always know what she's running on your behalf.
             </p>
           </div>
           <div className="mav-card" style={{ padding: 24, background: 'var(--ink0)' }}>
@@ -128,7 +128,13 @@ export default function OutcomesPage() {
       </Section>
 
       <Section dense style={{ padding: '120px 0' }}>
-        <ClosingCTA />
+        <ClosingCTA
+          headline={<>Hand Maven the <em className="mav-gradient-text">first goal.</em></>}
+          lede="Spin up an Outcome in minutes. Maven plans the work, runs it on cadence, and reports back &mdash; for as long as it takes."
+          primaryLabel="Start your first outcome"
+          secondaryLabel="See the agents"
+          secondaryHref="/agents"
+        />
       </Section>
       <MavFooter />
     </>

@@ -250,7 +250,12 @@ export default function IntegrationsPage() {
       </Section>
 
       <Section dense style={{ padding: '120px 0' }}>
-        <ClosingCTA />
+        <ClosingCTA
+          headline={<>Every tool, in <em className="mav-gradient-text">one credential vault.</em></>}
+          lede="Attach the servers Maven should reach. Or attach Mavera to Claude, Cursor, or ChatGPT. The protocol is the same — the credentials stay yours."
+          primaryLabel="Attach a server"
+          secondaryLabel="Read the MCP spec"
+        />
       </Section>
       <MavFooter />
     </>

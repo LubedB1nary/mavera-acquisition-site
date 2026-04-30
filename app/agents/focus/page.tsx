@@ -6,12 +6,12 @@ export default function FocusPage() {
       eyebrow="focus"
       name="Focus groups"
       tagline={<>Ask your audience <em>before</em> you spend.</>}
-      lede="Synthetic focus groups with statistically validated personas. Twelve question types. Synthesis in minutes. 96% parity with traditional panels across 52+ published studies."
+      lede="Synthetic focus groups with statistically validated personas. Twelve question types. Synthesis in minutes. 98% agreement with the Harvard OASIS human-subject study."
       metrics={[
         ['50+', 'Built-in personas'],
         ['12', 'Question types'],
-        ['98%', 'OASIS benchmark accuracy'],
-        ['52+', 'Published studies'],
+        ['98%', 'Agreement with the Harvard OASIS human-subject study'],
+        ['min', 'Synthesis turnaround'],
       ]}
       sections={[
         {

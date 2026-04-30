@@ -1,59 +1,18 @@
 'use client';
 import Link from 'next/link';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { ArrowRight, ArrowUpRight } from './icons';
 import { CountUp } from './reveal';
 
-const HEADLINE_WORDS = ['Agents', 'that', 'walk'];
-const HEADLINE_EM = ['through'];
-const HEADLINE_TAIL = ['the', 'door.'];
-
-const ROTATING_PHRASES = [
-  'turn live market signals into growth',
-  'detect a Series B announcement in 14 minutes',
-  'draft outreach in your brand voice',
-  'qualify leads with explainable scores',
-  'book the discovery while you sleep',
-];
+const HEADLINE_LINE_1 = ['Autonomous', 'agents.'];
+const HEADLINE_LINE_2_EM = ['Human', 'intelligence.'];
+const HEADLINE_LINE_3 = ['Evidence', 'on', 'every', 'decision.'];
 
 type Particle = { left: number; top: number; size: number; delay: number; dur: number; opacity: number };
 
 export function HomeHero() {
   const heroRef = useRef<HTMLElement | null>(null);
   const glowRef = useRef<HTMLDivElement | null>(null);
-  const [phraseIdx, setPhraseIdx] = useState(0);
-  const [typed, setTyped] = useState('');
-
-  // typewriter loop for the rotating subline
-  useEffect(() => {
-    const phrase = ROTATING_PHRASES[phraseIdx];
-    let i = 0;
-    let dir: 1 | -1 = 1;
-    let timer: ReturnType<typeof setTimeout>;
-
-    const tick = () => {
-      if (dir === 1) {
-        i++;
-        setTyped(phrase.slice(0, i));
-        if (i >= phrase.length) {
-          dir = -1;
-          timer = setTimeout(tick, 2400);
-          return;
-        }
-        timer = setTimeout(tick, 38 + Math.random() * 30);
-      } else {
-        i--;
-        setTyped(phrase.slice(0, i));
-        if (i <= 0) {
-          setPhraseIdx(p => (p + 1) % ROTATING_PHRASES.length);
-          return;
-        }
-        timer = setTimeout(tick, 18);
-      }
-    };
-    timer = setTimeout(tick, 280);
-    return () => clearTimeout(timer);
-  }, [phraseIdx]);
 
   // cursor-follow glow
   useEffect(() => {
@@ -194,19 +153,21 @@ export function HomeHero() {
           </span>
         </div>
 
-        <h1 className="mav-h1" style={{ maxWidth: 1000, lineHeight: 0.98 }}>
-          {HEADLINE_WORDS.map((w, i) => (
-            <span key={i} className="mav-word" style={{ animationDelay: `${0.1 + i * 0.08}s`, marginRight: '0.28em' }}>
+        <h1 className="mav-h1" style={{ maxWidth: 1100, lineHeight: 0.98 }}>
+          {HEADLINE_LINE_1.map((w, i) => (
+            <span key={`l1-${i}`} className="mav-word" style={{ animationDelay: `${0.1 + i * 0.08}s`, marginRight: '0.28em' }}>
               {w}
             </span>
           ))}
-          {HEADLINE_EM.map((w, i) => (
-            <em key={`em-${i}`} className="mav-word mav-gradient-text" style={{ animationDelay: `${0.1 + (HEADLINE_WORDS.length + i) * 0.08}s`, marginRight: '0.28em' }}>
+          <br />
+          {HEADLINE_LINE_2_EM.map((w, i) => (
+            <em key={`l2-${i}`} className="mav-word mav-gradient-text" style={{ animationDelay: `${0.1 + (HEADLINE_LINE_1.length + i) * 0.08}s`, marginRight: '0.28em' }}>
               {w}
             </em>
           ))}
-          {HEADLINE_TAIL.map((w, i) => (
-            <span key={`t-${i}`} className="mav-word" style={{ animationDelay: `${0.1 + (HEADLINE_WORDS.length + HEADLINE_EM.length + i) * 0.08}s`, marginRight: '0.28em' }}>
+          <br />
+          {HEADLINE_LINE_3.map((w, i) => (
+            <span key={`l3-${i}`} className="mav-word" style={{ animationDelay: `${0.1 + (HEADLINE_LINE_1.length + HEADLINE_LINE_2_EM.length + i) * 0.08}s`, marginRight: '0.28em' }}>
               {w}
             </span>
           ))}
@@ -215,19 +176,14 @@ export function HomeHero() {
         <p
           className="mav-lede"
           style={{
-            maxWidth: 620, marginTop: 32, fontSize: 20,
+            maxWidth: 720, marginTop: 32, fontSize: 20,
             opacity: 0,
             animation: 'mav-rise-soft 1s cubic-bezier(.2,.7,.2,1) .85s forwards',
-            minHeight: '3.2em',
           }}
         >
-          Autonomous agents that{' '}
-          <span style={{ color: 'var(--text)', borderBottom: '1px dashed var(--gold-dim)', paddingBottom: 2 }}>
-            {typed}
-            <span style={{ display: 'inline-block', width: 1, marginLeft: 2, color: 'var(--gold)', animation: 'mav-blink-cursor 1s step-end infinite' }}>
-              |
-            </span>
-          </span>{' '}— with an evidence chain on every decision.
+          Maven runs the full growth cycle &mdash; sales, research, content, meetings &mdash; so you close the deal.
+          {' '}
+          <span style={{ color: 'var(--text)' }}>Every action is logged. Every source is cited.</span>
         </p>
 
         <div
@@ -258,8 +214,8 @@ export function HomeHero() {
             animation: 'mav-shimmer 4.5s ease-in-out infinite',
           }} />
           {[
-            { display: <><CountUp to={98} />%</>, label: 'Accuracy vs. real human panels · OASIS benchmark' },
-            { display: <><CountUp to={50} />M+</>, label: 'Behavioral interactions in the synthetic layer' },
+            { display: <><CountUp to={98} />%</>, label: 'Agreement with the Harvard OASIS human-subject study' },
+            { display: <><CountUp to={4} />M+</>, label: 'Behavioral interactions in the synthetic layer' },
             { display: <><CountUp to={295} />K+</>, label: 'Media sources under continuous monitoring' },
             { display: <><CountUp to={9} /></>, label: 'Enterprise customers · SOC 2 · ISO 27001 · ISO 42001' },
           ].map((s, idx) => (

@@ -21,8 +21,11 @@ export default function OpsPage() {
               <div>
                 <h2 className="mav-h2" style={{ fontSize: 44 }}>Pipeline. <em>Automation. You.</em></h2>
                 <p className="mav-lede" style={{ marginTop: 20 }}>
-                  Most sales orgs glue together 6-10 SaaS products. Ops replaces the critical layer — CRM plus automation —
+                  Most sales orgs glue together 6-10 SaaS products. Ops replaces the critical layer &mdash; CRM plus automation &mdash;
                   and keeps your data in your own environment.
+                </p>
+                <p className="mav-body" style={{ marginTop: 16, color: 'var(--gold)', fontSize: 14, fontWeight: 500 }}>
+                  Your data stays in your environment. No Salesforce. No HubSpot dependency.
                 </p>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
