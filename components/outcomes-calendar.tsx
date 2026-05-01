@@ -36,26 +36,28 @@ export function OutcomesCalendar() {
         </div>
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', borderBottom: '1px solid var(--line)' }}>
-        {days.map((d, i) => (
-          <div key={d} style={{
-            padding: '16px 14px', minHeight: 220, borderRight: i < 6 ? '1px solid var(--line)' : 'none',
-            opacity: i > 4 ? 0.62 : 1, display: 'flex', flexDirection: 'column', gap: 10,
-          }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-              <div style={{ fontSize: 13, fontWeight: 500, color: 'var(--text)' }}>{d}</div>
-              {moods[i] && <div style={{ fontSize: 13 }}>{moods[i]}</div>}
+      <div className="mav-cal-scroll" style={{ overflowX: 'auto', borderBottom: '1px solid var(--line)' }}>
+        <div className="mav-cal-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', minWidth: 0 }}>
+          {days.map((d, i) => (
+            <div key={d} style={{
+              padding: '16px 14px', minHeight: 220, borderRight: i < 6 ? '1px solid var(--line)' : 'none',
+              opacity: i > 4 ? 0.62 : 1, display: 'flex', flexDirection: 'column', gap: 10,
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div style={{ fontSize: 13, fontWeight: 500, color: 'var(--text)' }}>{d}</div>
+                {moods[i] && <div style={{ fontSize: 13 }}>{moods[i]}</div>}
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                {(events[i] || []).map(([oc, icon, text], j) => (
+                  <div key={j} style={{ display: 'flex', alignItems: 'flex-start', gap: 6, fontSize: 11.5, lineHeight: 1.35, color: 'var(--dim)' }}>
+                    <span style={{ width: 6, height: 6, marginTop: 4, borderRadius: 999, background: colors[oc], flexShrink: 0 }} />
+                    <span>{icon} {text}</span>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-              {(events[i] || []).map(([oc, icon, text], j) => (
-                <div key={j} style={{ display: 'flex', alignItems: 'flex-start', gap: 6, fontSize: 11.5, lineHeight: 1.35, color: 'var(--dim)' }}>
-                  <span style={{ width: 6, height: 6, marginTop: 4, borderRadius: 999, background: colors[oc], flexShrink: 0 }} />
-                  <span>{icon} {text}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
 
       <div style={{ padding: '12px 20px', borderBottom: '1px solid var(--line)', display: 'flex', gap: 22, fontSize: 11.5, color: 'var(--dim)', fontFamily: 'var(--mono)', letterSpacing: '.04em' }}>

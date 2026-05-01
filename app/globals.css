@@ -499,3 +499,244 @@ button { font-family: inherit; }
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 3px; }
 ::-webkit-scrollbar-track { background: transparent; }
+
+/* ============================================================
+   MOBILE / RESPONSIVE
+   IMPORTANT: React renders inline styles as kebab-case CSS strings
+   without a space after the colon, e.g. style="grid-template-columns:repeat(4, 1fr);padding:120px 0".
+   All [style*=...] selectors below must match that exact format.
+   ============================================================ */
+
+img, svg, video { max-width: 100%; }
+html, body { overflow-x: hidden; }
+
+/* ====== TABLET (≤ 1024px) ====== */
+@media (max-width: 1024px) {
+  .mav-container { padding: 0 32px; }
+
+  .mav-h1 { font-size: 64px; letter-spacing: -0.03em; }
+  .mav-h2 { font-size: 42px; }
+  .mav-h3 { font-size: 24px; }
+
+  /* 4 / 5-col → 2-col on tablet */
+  [style*="grid-template-columns:repeat(4, 1fr)"],
+  [style*="grid-template-columns:repeat(5, 1fr)"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  section[style*="padding:120px 0"] { padding: 80px 0 !important; }
+}
+
+/* ====== MOBILE (≤ 768px) ====== */
+@media (max-width: 768px) {
+  .mav-container { padding: 0 20px; }
+
+  /* typography */
+  .mav-h1 { font-size: 44px; line-height: 1.04; letter-spacing: -0.025em; }
+  .mav-h2 { font-size: 30px; line-height: 1.08; letter-spacing: -0.02em; }
+  .mav-h3 { font-size: 20px; }
+  .mav-lede { font-size: 16px; line-height: 1.55; }
+  .mav-body { font-size: 14px; }
+  .mav-caption { font-size: 12px; }
+
+  .mav-btn { padding: 12px 18px; font-size: 13.5px; }
+  .mav-btn--sm { padding: 8px 12px; font-size: 12.5px; }
+
+  /* universal grid collapse: catch every inline grid declaration.
+     Exempted: components that have their own mobile rules. */
+  [style*="grid-template-columns"]:not(.mav-cmp-table):not(.mav-cal-grid):not(.mav-tool-grid):not(.mav-hero-stats):not(.mav-footer-grid) {
+    grid-template-columns: 1fr !important;
+  }
+  .mav-cmp-scroll, .mav-cal-scroll { -webkit-overflow-scrolling: touch; }
+
+  /* preserve 7-col calendars (handled by .mav-cal-grid below) */
+
+  /* shrink the most common large section paddings */
+  section[style*="padding:120px 0"],
+  section[style*="padding:120px 0 100px"],
+  section[style*="padding:120px 0 60px"],
+  section[style*="padding:120px 0 40px"],
+  section[style*="padding:96px 64px"] {
+    padding: 56px 0 !important;
+  }
+
+  /* generic inline padding shrinks (rendered as kebab w/ no space after colon) */
+  [style*="padding:96px 64px"] { padding: 48px 24px !important; }
+  [style*="padding:28px"] { padding: 20px !important; }
+  [style*="padding:26px"] { padding: 18px !important; }
+
+  /* large gaps shrink */
+  [style*="gap:80px"] { gap: 32px !important; }
+  [style*="gap:72px"] { gap: 32px !important; }
+  [style*="gap:64px"] { gap: 28px !important; }
+  [style*="gap:56px"] { gap: 24px !important; }
+  [style*="gap:48px"] { gap: 24px !important; }
+
+  /* big inline-styled headlines */
+  h1[style*="font-size:88px"],
+  h1[style*="font-size:76px"],
+  h1[style*="font-size:72px"] {
+    font-size: 44px !important;
+    line-height: 1.04 !important;
+  }
+  h2[style*="font-size:56px"],
+  h2[style*="font-size:52px"],
+  h2[style*="font-size:48px"] {
+    font-size: 30px !important;
+    line-height: 1.1 !important;
+  }
+  h3[style*="font-size:28px"],
+  h3[style*="font-size:26px"] {
+    font-size: 20px !important;
+  }
+
+  /* tone down very large stat numbers */
+  span[style*="font-size:44px"],
+  span[style*="font-size:42px"],
+  span[style*="font-size:40px"],
+  span[style*="font-size:34px"] {
+    font-size: 26px !important;
+  }
+
+  /* drop forced min-height on demo cards */
+  [style*="min-height:520px"],
+  [style*="min-height:420px"],
+  [style*="min-height:220px"],
+  [style*="min-height:180px"],
+  [style*="min-height:160px"] {
+    min-height: 0 !important;
+  }
+
+  /* disable pricey hover transforms on touch */
+  .mav-tilt { transform: none !important; }
+  .mav-cursor-glow { display: none !important; }
+
+  /* hero pill should not blow out the viewport */
+  .mav-shimmer[style*="display:inline-flex"] { max-width: 100%; }
+  .mav-hero-pill { flex-wrap: wrap; }
+
+  pre, .mav-card pre { -webkit-overflow-scrolling: touch; }
+}
+
+/* ====== SMALL PHONES (≤ 480px) ====== */
+@media (max-width: 480px) {
+  .mav-container { padding: 0 16px; }
+
+  .mav-h1 { font-size: 36px; }
+  .mav-h2 { font-size: 26px; }
+
+  h1[style*="font-size:88px"],
+  h1[style*="font-size:76px"],
+  h1[style*="font-size:72px"] {
+    font-size: 36px !important;
+  }
+  h2[style*="font-size:56px"],
+  h2[style*="font-size:52px"],
+  h2[style*="font-size:48px"] {
+    font-size: 26px !important;
+  }
+
+  section[style*="padding:120px 0"],
+  section[style*="padding:120px 0 60px"],
+  section[style*="padding:120px 0 100px"] {
+    padding: 40px 0 !important;
+  }
+
+  .mav-btn { padding: 12px 16px; font-size: 13px; }
+}
+
+/* ====== TOUCH-DEVICE TUNING (no hover) ====== */
+@media (hover: none) {
+  .mav-hover-lift:hover { transform: none !important; box-shadow: none !important; }
+  .mav-tilt { transform: none !important; }
+  .mav-pipeline-logo { opacity: 1; }
+}
+
+/* ====== Component-scoped tuning ====== */
+@media (max-width: 768px) {
+  /* hero */
+  .mav-home-hero { padding: 64px 0 48px !important; }
+  .mav-home-hero .mav-hero-stats {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 18px 16px !important;
+    margin-top: 48px !important;
+    padding-top: 24px !important;
+  }
+  .mav-home-hero .mav-hero-stats span[style*="font-size:34px"] {
+    font-size: 24px !important;
+  }
+  .mav-hero-pill {
+    flex-wrap: wrap;
+    font-size: 10.5px !important;
+  }
+
+  /* footer */
+  .mav-footer-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 32px 20px !important;
+    margin-bottom: 40px !important;
+  }
+  .mav-footer-grid > div:first-child { grid-column: 1 / -1; }
+  .mav-footer-bottom {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 8px;
+  }
+
+  /* outcomes calendar — keep 7-day layout but allow horizontal scroll */
+  .mav-cal-grid {
+    grid-template-columns: repeat(7, minmax(150px, 1fr)) !important;
+    width: max-content;
+  }
+  .mav-cal-scroll { -webkit-overflow-scrolling: touch; }
+
+  /* closing CTA: tame 96px/64px padding */
+  .mav-closing-cta { padding: 56px 24px !important; }
+  .mav-closing-cta h2 { font-size: 30px !important; }
+
+  /* tool inventory: 4-col → 2-col */
+  .mav-tool-grid { grid-template-columns: repeat(2, 1fr) !important; }
+
+  /* AgentDemo: tighter padding & gap */
+  .mav-agent-demo { padding: 18px !important; gap: 18px !important; }
+
+  /* CodeCard pre block */
+  .mav-card pre { font-size: 11.5px !important; padding: 14px 16px !important; }
+
+  /* PipelineRow logos */
+  .mav-pipeline-logo { font-size: 18px !important; }
+  .mav-marquee { gap: 36px !important; }
+
+  pre { white-space: pre; overflow-x: auto; }
+}
+
+@media (max-width: 480px) {
+  header > .mav-container { padding: 0 16px; }
+  .mav-home-hero { padding: 48px 0 32px !important; }
+  .mav-home-hero .mav-hero-stats {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 16px 14px !important;
+  }
+  .mav-closing-cta { padding: 40px 18px !important; }
+}
+
+/* ====== prevent intrinsic-width children from blowing out grid cells ====== */
+@media (max-width: 768px) {
+  /* grid items default to min-width: auto which equals min-content;
+     this lets a wide pre/svg/canvas blow out the column. force shrinkability. */
+  [style*="display:grid"] > * { min-width: 0; }
+  [style*="display:flex"] > * { min-width: 0; }
+
+  /* hide the decorative ASCII torus on phones (it's intrinsically ~600px wide) */
+  .mav-ascii-torus,
+  .mav-ascii-telemetry { display: none !important; }
+
+  /* make sure heavy code/pre content doesn't blow out either */
+  pre { max-width: 100%; }
+
+  /* neutralize negative margins commonly used to "float" CTAs over headings on desktop */
+  [style*="margin-top:-20px"] { margin-top: 0 !important; }
+  [style*="margin-bottom:-40px"] { margin-bottom: 16px !important; }
+  [style*="margin-bottom:-20px"] { margin-bottom: 12px !important; }
+  [style*="margin-top:-40px"] { margin-top: 0 !important; }
+}

@@ -48,7 +48,7 @@ export function MavFooter() {
   return (
     <footer style={{ borderTop: '1px solid var(--line)', padding: '72px 0 32px', marginTop: 64 }}>
       <div className="mav-container">
-        <div style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr 1fr 1fr 1fr', gap: 56, marginBottom: 72 }}>
+        <div className="mav-footer-grid" style={{ display: 'grid', gridTemplateColumns: '1.6fr 1fr 1fr 1fr 1fr', gap: 56, marginBottom: 72 }}>
           <div>
             <MavLogo size={18} />
             <p className="mav-body" style={{ maxWidth: 280, marginTop: 20, color: 'var(--muted)', fontSize: 13.5 }}>
@@ -71,7 +71,7 @@ export function MavFooter() {
             </div>
           ))}
         </div>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 24, borderTop: '1px solid var(--line)' }}>
+        <div className="mav-footer-bottom" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 24, borderTop: '1px solid var(--line)' }}>
           <span className="mav-caption">© 2026 Mavera, Inc. All rights reserved.</span>
           <span className="mav-caption" style={{ fontFamily: 'var(--mono)', letterSpacing: '0.04em' }}>Receipts, not vibes.</span>
         </div>

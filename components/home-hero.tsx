@@ -66,6 +66,7 @@ export function HomeHero() {
   return (
     <section
       ref={heroRef}
+      className="mav-home-hero"
       style={{ position: 'relative', padding: '120px 0 100px', overflow: 'hidden', isolation: 'isolate' }}
     >
       <div className="mav-aurora" aria-hidden>
@@ -127,13 +128,14 @@ export function HomeHero() {
 
       <div className="mav-container" style={{ position: 'relative', zIndex: 2 }}>
         <div
-          className="mav-shimmer"
+          className="mav-shimmer mav-hero-pill"
           style={{
             display: 'inline-flex', alignItems: 'stretch', marginBottom: 28,
             border: '1px solid var(--line)', borderLeft: '2px solid var(--gold)',
             borderRadius: 2, overflow: 'hidden', background: 'rgba(255,255,255,0.02)',
             fontFamily: 'var(--mono)', fontSize: 11.5, letterSpacing: '.04em',
             animation: 'mav-rise-soft .8s cubic-bezier(.2,.7,.2,1) both',
+            maxWidth: '100%',
           }}
         >
           <span style={{ padding: '8px 12px', color: 'var(--gold)', background: 'var(--gold-dim)', borderRight: '1px solid var(--line)', textTransform: 'uppercase', position: 'relative' }}>
@@ -201,6 +203,7 @@ export function HomeHero() {
         </div>
 
         <div
+          className="mav-hero-stats"
           style={{
             marginTop: 96, display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 32,
             borderTop: '1px solid var(--line)', paddingTop: 32, position: 'relative',

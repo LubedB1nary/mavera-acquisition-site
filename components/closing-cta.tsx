@@ -21,7 +21,7 @@ export function ClosingCTA({
 }: ClosingCTAProps = {}) {
   return (
     <div
-      className="mav-glow"
+      className="mav-glow mav-closing-cta"
       style={{
         position: 'relative', border: '1px solid var(--line)', borderRadius: 16, overflow: 'hidden',
         padding: '96px 64px', textAlign: 'center',

@@ -129,22 +129,24 @@ export default function PricingPage() {
           ))}
         </div>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr 1fr 1fr', borderTop: '1px solid var(--line)' }}>
-          <div style={{ padding: '16px 14px', fontSize: 12, color: 'var(--muted)', fontFamily: 'var(--mono)', letterSpacing: '.06em', textTransform: 'uppercase' }}>Compare</div>
-          <div style={{ padding: '16px 14px', fontSize: 13, fontWeight: 500 }}>Starter</div>
-          <div style={{ padding: '16px 14px', fontSize: 13, fontWeight: 500 }}>Basic Agency</div>
-          <div style={{ padding: '16px 14px', fontSize: 13, fontWeight: 500, color: 'var(--gold)' }}>Professional</div>
-          <div style={{ padding: '16px 14px', fontSize: 13, fontWeight: 500 }}>Enterprise</div>
-          {comparisonRows.map((row, i) => (
-            <div key={i} style={{ display: 'contents' }}>
-              {row.map((c, j) => (
-                <div key={j} style={{
-                  padding: '13px 14px', borderTop: '1px solid var(--line-soft)',
-                  fontSize: 13, color: j === 0 ? 'var(--dim)' : 'var(--text)', fontFamily: j === 0 ? 'var(--sans)' : 'var(--mono)',
-                }}>{c}</div>
-              ))}
-            </div>
-          ))}
+        <div className="mav-cmp-scroll" style={{ overflowX: 'auto' }}>
+          <div className="mav-cmp-table" style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr 1fr 1fr 1fr', borderTop: '1px solid var(--line)', minWidth: 700 }}>
+            <div style={{ padding: '16px 14px', fontSize: 12, color: 'var(--muted)', fontFamily: 'var(--mono)', letterSpacing: '.06em', textTransform: 'uppercase' }}>Compare</div>
+            <div style={{ padding: '16px 14px', fontSize: 13, fontWeight: 500 }}>Starter</div>
+            <div style={{ padding: '16px 14px', fontSize: 13, fontWeight: 500 }}>Basic Agency</div>
+            <div style={{ padding: '16px 14px', fontSize: 13, fontWeight: 500, color: 'var(--gold)' }}>Professional</div>
+            <div style={{ padding: '16px 14px', fontSize: 13, fontWeight: 500 }}>Enterprise</div>
+            {comparisonRows.map((row, i) => (
+              <div key={i} style={{ display: 'contents' }}>
+                {row.map((c, j) => (
+                  <div key={j} style={{
+                    padding: '13px 14px', borderTop: '1px solid var(--line-soft)',
+                    fontSize: 13, color: j === 0 ? 'var(--dim)' : 'var(--text)', fontFamily: j === 0 ? 'var(--sans)' : 'var(--mono)',
+                  }}>{c}</div>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
       </Section>
 

@@ -74,7 +74,7 @@ export function ToolInventoryDemo({ tools: toolsProp, scripts: scriptsProp }: { 
         </div>
       </div>
 
-      <div style={{ padding: 22, display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10 }}>
+      <div className="mav-tool-grid" style={{ padding: 22, display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 10 }}>
         {tools.map(t => {
           const isActive = t.id === activeTool;
           const wasUsed = script.steps.slice(0, stepIdx).includes(t.id);

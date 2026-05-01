@@ -237,7 +237,7 @@ export function AgentDemo({ compact = false }: { compact?: boolean }) {
   const step = AGENT_STEPS[i];
 
   return (
-    <div style={{
+    <div className="mav-agent-demo" style={{
       background: 'var(--ink1)', border: '1px solid var(--line)', borderRadius: 16,
       padding: compact ? 20 : 28, display: 'grid', gridTemplateColumns: '1fr 1.15fr',
       gap: 28, minHeight: compact ? 420 : 520,
